@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : GObject
 {
-    public int money;
+    [HideInInspector] public int money;
     void Start()
     {
         money = 1000;
@@ -23,4 +23,6 @@ public class Player : GObject
     public void AddMoney(int amount){
         money += amount;
     }
+
+
 }
