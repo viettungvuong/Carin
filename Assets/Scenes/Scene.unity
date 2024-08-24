@@ -132,11 +132,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
   m_PrefabInstance: {fileID: 1870181660}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &261922214 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
-  m_PrefabInstance: {fileID: 1870181660}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &261922215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,29 +172,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   money: 0
---- !u!64 &261922218
-MeshCollider:
+--- !u!95 &261922220
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261922212}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6323242128065519052, guid: d767d3bd778f7449b8c6e81dc7f7fc03, type: 3}
---- !u!54 &261922219
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22fdea0489d2b1e42b3b245c4343e883, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &261922221
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,7 +203,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -222,9 +216,9 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 118
   m_CollisionDetection: 0
 --- !u!1 &322622804
 GameObject:
@@ -493,7 +487,6 @@ GameObject:
   - component: {fileID: 880300071}
   - component: {fileID: 880300070}
   - component: {fileID: 880300069}
-  - component: {fileID: 880300073}
   - component: {fileID: 880300074}
   m_Layer: 0
   m_Name: Player
@@ -592,33 +585,6 @@ Transform:
   - {fileID: 261922213}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &880300073
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880300068}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!114 &880300074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,13 +597,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320f3dcb924c54fa0a82c3f3dd9d844f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAnim: {fileID: 261922214}
-  playerRigid: {fileID: 880300073}
-  w_speed: 150
-  wb_speed: 150
-  olw_speed: 150
-  rn_speed: 5
-  ro_speed: 5
+  playerAnim: {fileID: 261922220}
+  playerRigid: {fileID: 261922221}
+  w_speed: 2
+  wb_speed: 2
+  olw_speed: 2
+  rn_speed: 10
+  ro_speed: 10
   playerTrans: {fileID: 880300072}
 --- !u!1 &963194225
 GameObject:
@@ -1039,10 +1005,10 @@ PrefabInstance:
       addedObject: {fileID: 261922215}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 261922218}
+      addedObject: {fileID: 261922220}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 261922219}
+      addedObject: {fileID: 261922221}
   m_SourcePrefab: {fileID: 100100000, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
 --- !u!1 &2042847095
 GameObject:

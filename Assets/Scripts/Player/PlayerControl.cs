@@ -14,15 +14,20 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 movement = Vector3.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            playerRigid.velocity = transform.forward * w_speed * Time.deltaTime;
+            movement += playerTrans.forward * w_speed * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            playerRigid.velocity = -transform.forward * wb_speed * Time.deltaTime;
+            movement -= playerTrans.forward * wb_speed * Time.deltaTime;
         }
+
+        playerRigid.MovePosition(playerRigid.position + movement);
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
