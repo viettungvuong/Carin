@@ -321,6 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372985528}
+  - component: {fileID: 372985529}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -343,6 +344,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372985529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372985526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a01ae33e3724b0686cdc4259a026d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Zombie
+    prefab: {fileID: 373545741}
+    size: 100
+--- !u!1 &373545741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c02417aae1a3343d89ead0cbf9c472e2, type: 3}
+  m_PrefabInstance: {fileID: 1857813925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &377814950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 234480625599603528, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
