@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 261922220}
+  rifle: {fileID: 895659900}
 --- !u!114 &261922217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,43 +691,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.028460737
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.03354963
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.01542965
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2945079
+      value: -0.06386204
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3274178
+      value: 0.46033934
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.65105075
+      value: -0.053446405
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.6182197
+      value: 0.8838285
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -78.122
+      value: 177.955
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -124.808
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 9.334
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
