@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 261922220}
   rifle: {fileID: 895659900}
+  bullet: {fileID: 895659901}
 --- !u!114 &261922217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -737,6 +738,11 @@ PrefabInstance:
 --- !u!4 &895659900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400004, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
+  m_PrefabInstance: {fileID: 895659899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &895659901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 898123174314851288, guid: 9a21925963ad72641b17d3da3e0c173f, type: 3}
   m_PrefabInstance: {fileID: 895659899}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225

@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator playerAnim;
-    public Transform rifle;
-    private Vector3 originalRifleAngle;
+    public Transform rifle, bullet;
+
     bool set = false;
     void Start()
     {
-        originalRifleAngle = rifle.localEulerAngles;
+        
     }
 
     // Update is called once per frame
@@ -22,7 +22,9 @@ public class PlayerAttack : MonoBehaviour
             rifle.Rotate(50,0,0);
             set = false;
         }
+    }
 
+    private void LateUpdate() {
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire")==false) // change rotation of rifle
         {
             if (!set){
@@ -30,6 +32,10 @@ public class PlayerAttack : MonoBehaviour
                 set = true;  
             }
    
-        }
+        }      
+    }
+
+    private void Shoot(){
+        
     }
 }
