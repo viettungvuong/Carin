@@ -160,8 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 261922220}
   rifle: {fileID: 886617922}
-  muzzle: {fileID: 886617922}
-  bulletForce: 10
+  muzzle: {fileID: 1770866433}
+  bulletForce: 5
 --- !u!114 &261922217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,6 +1050,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1268263993}
   m_SourcePrefab: {fileID: 100100000, guid: d5eb1b3748b88e245b2033ba7e2d3fa1, type: 3}
+--- !u!4 &1770866433 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8588616015463265649, guid: 5ff9ca79c157aed4caa369b916fc376b, type: 3}
+  m_PrefabInstance: {fileID: 886617921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1857813925
 PrefabInstance:
   m_ObjectHideFlags: 0
