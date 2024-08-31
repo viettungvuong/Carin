@@ -35,6 +35,6 @@ public class PlayerAttack : MonoBehaviour
     {
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.AddForce(rifle.forward * bulletForce, ForceMode.Impulse);
+        bulletRb.AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse);
     }
 }
