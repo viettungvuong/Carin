@@ -8,46 +8,33 @@ public class PlayerAttack : MonoBehaviour
     public Transform rifle, muzzle;
     public float bulletForce;
 
-    bool set = false; // used for reset angle when not shooting
     static bool shot = false;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        Debug.Log(muzzle.position);
-        if (Input.GetKey(KeyCode.Space)&&!shot)
+        if (Input.GetKeyDown(KeyCode.Space) && !shot)
         {
             shot = true;
             playerAnim.SetTrigger("fire");
-            // rifle.Rotate(50,0,0);
-            set = false;
-            Shoot();
+            StartCoroutine(DelayedShoot());
         }
 
-        if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire")==false) // change rotation of rifle
+        if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))
         {
             shot = false;
-            if (!set){
-                // rifle.Rotate(-50,0,0);
-                set = true;
-            }
-   
         } 
     }
 
+    private IEnumerator DelayedShoot()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Shoot();
+    }
 
-    private void Shoot(){
-        Debug.Log(muzzle.position);
+    private void Shoot()
+    {
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
-
-        // bullet.SetActive(true);
-
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-
         bulletRb.AddForce(rifle.forward * bulletForce, ForceMode.Impulse);
     }
 }
