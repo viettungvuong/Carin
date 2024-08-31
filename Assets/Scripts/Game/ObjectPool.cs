@@ -76,6 +76,7 @@ public class ObjectPool : MonoBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
         objectToSpawn.transform.position = position;
+        objectToSpawn.SetActive(true);
 
         spawnedObjects.Add(new Pair<GameObject, string>(objectToSpawn, tag)); 
         // add to the list of spawned objects

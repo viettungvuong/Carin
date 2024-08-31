@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator playerAnim;
-    public Transform rifle, bullet;
+    public Transform rifle, muzzle;
+    public float bulletForce;
 
-    bool set = false;
+    bool set = false; // used for reset angle when not shooting
+    static bool shot = false;
     void Start()
     {
         
@@ -16,26 +18,36 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        Debug.Log(muzzle.position);
+        if (Input.GetKey(KeyCode.Space)&&!shot)
         {
+            shot = true;
             playerAnim.SetTrigger("fire");
-            rifle.Rotate(50,0,0);
+            // rifle.Rotate(50,0,0);
             set = false;
+            Shoot();
         }
-    }
 
-    private void LateUpdate() {
         if (playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire")==false) // change rotation of rifle
         {
+            shot = false;
             if (!set){
-                rifle.Rotate(-50,0,0);
-                set = true;  
+                // rifle.Rotate(-50,0,0);
+                set = true;
             }
    
-        }      
+        } 
     }
 
+
     private void Shoot(){
-        
+        Debug.Log(muzzle.position);
+        GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
+
+        // bullet.SetActive(true);
+
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+
+        bulletRb.AddForce(rifle.forward * bulletForce, ForceMode.Impulse);
     }
 }
