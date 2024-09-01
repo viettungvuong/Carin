@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: e49b946d860b847839bdecd5018f26ce, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: cbd37819697c445a191ec7ff8c5d3cb1, type: 2}
 --- !u!1 &118564763
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +508,45 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c02417aae1a3343d89ead0cbf9c472e2, type: 3}
   m_PrefabInstance: {fileID: 1857813925}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &373545744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373545741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604ef71cc4731491ea7ee4629420ead8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 261922213}
+  detectionRange: 10
+  attackRange: 2
+  wanderRadius: 5
+  wanderTime: 3
+--- !u!195 &373545745
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373545741}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &377814950 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 234480625599603528, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
@@ -869,7 +908,7 @@ GameObject:
   - component: {fileID: 880300074}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1680,7 +1719,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02417aae1a3343d89ead0cbf9c472e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373545744}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c02417aae1a3343d89ead0cbf9c472e2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 373545745}
   m_SourcePrefab: {fileID: 100100000, guid: c02417aae1a3343d89ead0cbf9c472e2, type: 3}
 --- !u!1001 &1870181660
 PrefabInstance:
@@ -1741,6 +1786,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       propertyPath: m_Name
       value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       propertyPath: m_Controller

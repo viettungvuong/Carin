@@ -11,6 +11,7 @@ public class ZombieAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private float timer;
+    private Animator animator;
 
     private enum ZombieState { Idle, Wandering, Chasing, Attacking }
     private ZombieState currentState = ZombieState.Idle;
@@ -19,6 +20,8 @@ public class ZombieAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         timer = wanderTime;
+
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -28,6 +31,7 @@ public class ZombieAI : MonoBehaviour
         switch (currentState)
         {
             case ZombieState.Idle:
+                animator.SetTrigger("idle");
                 if (distanceToPlayer <= detectionRange)
                 {
                     currentState = ZombieState.Chasing;
@@ -39,6 +43,7 @@ public class ZombieAI : MonoBehaviour
                 break;
 
             case ZombieState.Wandering:
+                animator.SetTrigger("walk");
                 timer += Time.deltaTime;
 
                 if (timer >= wanderTime)
@@ -55,6 +60,7 @@ public class ZombieAI : MonoBehaviour
                 break;
 
             case ZombieState.Chasing:
+                animator.SetTrigger("walk");
                 agent.SetDestination(player.position);
 
                 if (distanceToPlayer <= attackRange)
@@ -68,7 +74,7 @@ public class ZombieAI : MonoBehaviour
                 break;
 
             case ZombieState.Attacking:
-                Debug.Log("Zombie is attacking!");
+                animator.SetTrigger("attack1");
 
                 if (distanceToPlayer > attackRange)
                 {
@@ -85,5 +91,11 @@ public class ZombieAI : MonoBehaviour
         NavMeshHit navHit;
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return navHit.position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Player")){
+            
+        }
     }
 }
