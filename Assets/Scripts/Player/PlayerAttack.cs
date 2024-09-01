@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public Animator playerAnim;
     public Transform rifle, muzzle;
     public float bulletForce;
+    public ParticleSystem muzzleFlash;
 
     static bool shot = false;
 
@@ -36,5 +37,6 @@ public class PlayerAttack : MonoBehaviour
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse);
+        muzzleFlash.Play();
     }
 }
