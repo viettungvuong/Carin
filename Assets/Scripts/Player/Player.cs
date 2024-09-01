@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player : GObject
 {
     [HideInInspector] public int money;
+    public TextMeshProUGUI healthText;
+
     void Start()
     {
         money = 1000;
     }
+
+    
 
     public bool UseMoney(int amount){
         if (amount>money){
