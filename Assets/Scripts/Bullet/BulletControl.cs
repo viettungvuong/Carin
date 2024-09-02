@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletControl : MonoBehaviour
 {
-    public int damage;
+    public int damage=10;
     void Start()
     {
         
