@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       propertyPath: m_Name
-      value: Idle
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       propertyPath: m_TagString
@@ -379,10 +379,10 @@ PrefabInstance:
       addedObject: {fileID: 6622128691235455419}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4224853398585426299}
+      addedObject: {fileID: 5582135845515387957}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5582135845515387957}
+      addedObject: {fileID: 5128384548900928469}
   m_SourcePrefab: {fileID: 100100000, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
 --- !u!4 &5897738259420688610 stripped
 Transform:
@@ -443,7 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c661cb70b56454567b69895c7fa130bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horse: {fileID: 0}
   interactionDistance: 2
 --- !u!95 &6992457450369554416
 Animator:
@@ -493,8 +492,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &4224853398585426299
-CapsuleCollider:
+--- !u!114 &5582135845515387957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526605500554963544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 320f3dcb924c54fa0a82c3f3dd9d844f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerAnim: {fileID: 6992457450369554416}
+  playerRigid: {fileID: 6622128691235455419}
+  walkSpeed: 5
+  backwardSpeed: 3
+  idleSpeed: 2
+  runSpeedIncrease: 2
+  turnSpeed: 1
+  torqueAmount: 10
+  playerTrans: {fileID: 0}
+  turnSmoothTime: 0.1
+  turnMultiplier: 2
+--- !u!65 &5128384548900928469
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -511,28 +533,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.5902548
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.7951274, z: 0}
---- !u!114 &5582135845515387957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6526605500554963544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 320f3dcb924c54fa0a82c3f3dd9d844f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAnim: {fileID: 6992457450369554416}
-  playerRigid: {fileID: 6622128691235455419}
-  w_speed: 2
-  wb_speed: 2
-  olw_speed: 2
-  rn_speed: 10
-  ro_speed: 10
-  playerTrans: {fileID: 0}
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.7924072, z: 0.9999986}
+  m_Center: {x: 0, y: 0.92851615, z: 0}
