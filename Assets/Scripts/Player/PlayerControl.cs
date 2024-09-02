@@ -1,8 +1,12 @@
 using UnityEngine;
-
 using System.Collections;
 using System.Collections.Generic;
 
+enum Direction{
+    FORWARD,
+    BACKWARD,
+    STILL
+}
 public class PlayerControl : MonoBehaviour
 {
     public Animator playerAnim;
@@ -10,23 +14,29 @@ public class PlayerControl : MonoBehaviour
     public float w_speed, wb_speed, olw_speed, rn_speed, ro_speed;
     private bool walking = false;
     public Transform playerTrans;
-    public float turnSmoothTime = 0.3f; 
-    private float turnSmoothVelocity;  
+    public float turnSmoothTime = 0.1f; // reduced for sharper turning
+    private float turnSmoothVelocity;
+    private Direction walkDirection = Direction.STILL;
+    public float turnMultiplier = 2.0f; // increase for sharper GTA-like turns
 
-    void FixedUpdate()
-    {
+    private void Move(){
         Vector3 movement = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W))
+        Debug.Log(walkDirection);
+        if (walkDirection == Direction.FORWARD)
         {
             movement += playerTrans.forward * w_speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (walkDirection == Direction.BACKWARD)
         {
             movement -= playerTrans.forward * wb_speed * Time.deltaTime;
         }
 
         playerRigid.MovePosition(playerRigid.position + movement);
+    }
+
+    void FixedUpdate()
+    {
+        Move();
     }
 
     void Update()
@@ -36,35 +46,37 @@ public class PlayerControl : MonoBehaviour
             playerAnim.SetTrigger("walk");
             playerAnim.ResetTrigger("idle");
             walking = true;
+            walkDirection = Direction.FORWARD;
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             playerAnim.ResetTrigger("walk");
             playerAnim.SetTrigger("idle");
             walking = false;
+            walkDirection = Direction.STILL;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerAnim.SetTrigger("walkback");
             playerAnim.ResetTrigger("idle");
+            walking = true;
+            walkDirection = Direction.BACKWARD;
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             playerAnim.ResetTrigger("walkback");
             playerAnim.SetTrigger("idle");
+            walking = false;
+            walkDirection = Direction.STILL;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (walking && Input.GetKey(KeyCode.A))
         {
-            float targetRotation = playerTrans.eulerAngles.y - ro_speed;
-            float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
-            playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
+            HandleRotation(-ro_speed); 
         }
-        if (Input.GetKey(KeyCode.D))
+        if (walking && Input.GetKey(KeyCode.D))
         {
-            float targetRotation = playerTrans.eulerAngles.y + ro_speed;
-            float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
-            playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
+            HandleRotation(ro_speed);   
         }
 
         if (walking == true)
@@ -82,5 +94,14 @@ public class PlayerControl : MonoBehaviour
                 playerAnim.SetTrigger("walk");
             }
         }
+    }
+
+    void HandleRotation(float rotationAmount)
+    {
+        Move();
+        float targetRotation = playerTrans.eulerAngles.y + (rotationAmount * turnMultiplier);
+        float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+        playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
+
     }
 }
