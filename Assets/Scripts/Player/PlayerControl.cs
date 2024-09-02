@@ -8,9 +8,10 @@ public class PlayerControl : MonoBehaviour
     public Animator playerAnim;
     public Rigidbody playerRigid;
     public float w_speed, wb_speed, olw_speed, rn_speed, ro_speed;
-    private bool walking=false;
+    private bool walking = false;
     public Transform playerTrans;
-
+    public float turnSmoothTime = 0.3f; 
+    private float turnSmoothVelocity;  
 
     void FixedUpdate()
     {
@@ -35,49 +36,47 @@ public class PlayerControl : MonoBehaviour
             playerAnim.SetTrigger("walk");
             playerAnim.ResetTrigger("idle");
             walking = true;
-            //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             playerAnim.ResetTrigger("walk");
             playerAnim.SetTrigger("idle");
             walking = false;
-            //steps1.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerAnim.SetTrigger("walkback");
             playerAnim.ResetTrigger("idle");
-            //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             playerAnim.ResetTrigger("walkback");
             playerAnim.SetTrigger("idle");
-            //steps1.SetActive(false);
         }
+
         if (Input.GetKey(KeyCode.A))
         {
-            playerTrans.Rotate(0, -ro_speed * Time.deltaTime, 0);
+            float targetRotation = playerTrans.eulerAngles.y - ro_speed;
+            float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            playerTrans.Rotate(0, ro_speed * Time.deltaTime, 0);
+            float targetRotation = playerTrans.eulerAngles.y + ro_speed;
+            float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+            playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
         }
+
         if (walking == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                //steps1.SetActive(false);
-                //steps2.SetActive(true);
                 w_speed = w_speed + rn_speed;
                 playerAnim.SetTrigger("run");
                 playerAnim.ResetTrigger("walk");
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                //steps1.SetActive(true);
-                //steps2.SetActive(false);
                 w_speed = olw_speed;
                 playerAnim.ResetTrigger("run");
                 playerAnim.SetTrigger("walk");

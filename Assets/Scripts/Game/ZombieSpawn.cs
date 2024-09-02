@@ -8,14 +8,13 @@ public class ZombieSpawn : ObjectSpawn
 
     void Awake() {
         objectTag = "Zombie";
-        spawnNumber = 10;
+        spawnNumber = 5;
     }
 
     void Update()
     {
         // distance player has moved
         float distanceMoved = Vector3.Distance(lastPosition, transform.position);
-        Debug.Log(distanceMoved);
 
         // player has move more than spawn distance
         if (distanceMoved >= spawnDistance)
