@@ -1,34 +1,39 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
-enum Direction{
+enum Direction
+{
     FORWARD,
     BACKWARD,
     STILL
 }
+
 public class PlayerControl : MonoBehaviour
 {
     public Animator playerAnim;
     public Rigidbody playerRigid;
-    public float w_speed, wb_speed, olw_speed, rn_speed, ro_speed;
+    public float walkSpeed = 5f;
+    public float backwardSpeed = 3f;
+    public float idleSpeed = 2f;
+    public float runSpeedIncrease = 2f;
+    public float turnSpeed = 1f;
     private bool walking = false;
     public Transform playerTrans;
-    public float turnSmoothTime = 0.1f; // reduced for sharper turning
+    public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     private Direction walkDirection = Direction.STILL;
-    public float turnMultiplier = 2.0f; // increase for sharper GTA-like turns
+    public float turnMultiplier = 2.0f;
 
-    private void Move(){
+    private void Move()
+    {
         Vector3 movement = Vector3.zero;
-        Debug.Log(walkDirection);
+        
         if (walkDirection == Direction.FORWARD)
         {
-            movement += playerTrans.forward * w_speed * Time.deltaTime;
+            movement += playerTrans.forward * walkSpeed * Time.deltaTime;
         }
         else if (walkDirection == Direction.BACKWARD)
         {
-            movement -= playerTrans.forward * wb_speed * Time.deltaTime;
+            movement -= playerTrans.forward * backwardSpeed * Time.deltaTime;
         }
 
         playerRigid.MovePosition(playerRigid.position + movement);
@@ -72,24 +77,24 @@ public class PlayerControl : MonoBehaviour
 
         if (walking && Input.GetKey(KeyCode.A))
         {
-            HandleRotation(-ro_speed); 
+            HandleRotation(-turnSpeed); 
         }
         if (walking && Input.GetKey(KeyCode.D))
         {
-            HandleRotation(ro_speed);   
+            HandleRotation(turnSpeed);   
         }
 
-        if (walking == true)
+        if (walking)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                w_speed = w_speed + rn_speed;
+                walkSpeed += runSpeedIncrease;
                 playerAnim.SetTrigger("run");
                 playerAnim.ResetTrigger("walk");
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                w_speed = olw_speed;
+                walkSpeed -= runSpeedIncrease;
                 playerAnim.ResetTrigger("run");
                 playerAnim.SetTrigger("walk");
             }
@@ -98,10 +103,8 @@ public class PlayerControl : MonoBehaviour
 
     void HandleRotation(float rotationAmount)
     {
-        Move();
         float targetRotation = playerTrans.eulerAngles.y + (rotationAmount * turnMultiplier);
         float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
         playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
-
     }
 }
