@@ -387,6 +387,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5128384548900928469}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 350470382161977704}
   m_SourcePrefab: {fileID: 100100000, guid: 90229f14bde154dc58f2fb6752a93bf9, type: 3}
 --- !u!4 &5897738259420688610 stripped
 Transform:
@@ -538,3 +541,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.7924072, z: 0.9999986}
   m_Center: {x: 0, y: 0.92851615, z: 0}
+--- !u!114 &350470382161977704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526605500554963544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc831f5d81e934263bf653d0aa0e044a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructionText: {fileID: 0}
+  car: {fileID: 0}
+  interactKey: F
+  interactionDistance: 5

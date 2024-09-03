@@ -40,7 +40,7 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Mode.mode!=PlayerMode.WALKING){
+        if (Mode.mode!=TypeMode.WALKING){
             return;
         }
         Move();
@@ -48,7 +48,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        if (Mode.mode!=PlayerMode.WALKING){
+        if (Mode.mode!=TypeMode.WALKING){
             return;
         }
         if (Input.GetKeyDown(KeyCode.W))

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerMode{
+public enum TypeMode{
     DRIVING,
     WALKING
 }
 
 public class Mode : MonoBehaviour
 {
-    public static PlayerMode mode = PlayerMode.WALKING;
+    public static TypeMode mode = TypeMode.WALKING;
 }
