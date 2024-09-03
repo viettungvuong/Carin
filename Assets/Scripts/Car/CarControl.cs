@@ -22,6 +22,9 @@ public class CarControl : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Mode.mode!=PlayerMode.DRIVING){
+            return;
+        }
         currentAcceleration = acceleration * Input.GetAxis("Vertical");
 
         if (Input.GetKey(KeyCode.Space))

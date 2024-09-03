@@ -40,11 +40,17 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (Mode.mode!=PlayerMode.WALKING){
+            return;
+        }
         Move();
     }
 
     void Update()
     {
+        if (Mode.mode!=PlayerMode.WALKING){
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.W))
         {
             playerAnim.SetTrigger("walk");
