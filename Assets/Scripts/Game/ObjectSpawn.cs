@@ -20,7 +20,8 @@ public abstract class ObjectSpawn : MonoBehaviour
 
 
 
-    protected void Spawn(){
+    protected void Spawn()
+    {
         for (int i = 0; i < spawnNumber; i++)
         {
             Vector3 spawnPosition;
@@ -29,21 +30,20 @@ public abstract class ObjectSpawn : MonoBehaviour
             do
             {
                 spawnPosition = lastPosition + Random.insideUnitSphere * spawnRadius;
-
-                spawnPosition.y = player.position.y;
-
+                spawnPosition.y = ObjectPool.ObjectPosition(objectTag).y - 2;
                 attempts++;
 
-            } while (Physics.OverlapSphere(spawnPosition, 1.5f, zombieLayer).Length>0 && attempts < 200);
+            } while (Physics.OverlapSphere(spawnPosition, 1.5f, zombieLayer).Length > 0 && attempts < 200);
 
             if (attempts >= 200)
             {
                 continue;
             }
 
+
+
             GameObject spawned = ObjectPool.SpawnFromPool(objectTag, spawnPosition);
             spawned.SetActive(true);
-
         }
     }
 }

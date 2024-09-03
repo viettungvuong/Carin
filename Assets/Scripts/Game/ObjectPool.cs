@@ -84,6 +84,10 @@ public class ObjectPool : MonoBehaviour
         return objectToSpawn;
     }
 
+    public static Vector3 ObjectPosition(string tag){
+        return poolDictionary[tag].Peek().transform.position;
+    }
+
     public class Pair<T1, T2>
     {
         public T1 First { get; }
