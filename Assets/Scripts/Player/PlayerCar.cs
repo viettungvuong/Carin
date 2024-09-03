@@ -1,10 +1,12 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class PlayerCar : MonoBehaviour
 {
     public TextMeshProUGUI instructionText; 
-    public Transform car; 
+    public Transform car;
+    public Camera carCamera, playerCamera;
     public string interactKey = "F";
     public float interactionDistance = 5f; 
 
@@ -17,22 +19,23 @@ public class PlayerCar : MonoBehaviour
     {
         float distanceToCar = Vector3.Distance(transform.position, car.position);
         
-        if (Mode.mode == TypeMode.DRIVING) // if currently driving
+        if (Input.GetKeyDown(KeyCode.F) && Mode.mode == TypeMode.DRIVING) // if currently driving
         {
             ExitCarMode();
             return;
         }
         
-        if (distanceToCar <= interactionDistance)
+        if (Mode.mode == TypeMode.WALKING&&distanceToCar <= interactionDistance)
         {
             instructionText.gameObject.SetActive(true);
             instructionText.text = interactKey + ": Drive";
             UpdateInstructionTextPosition();
             
-            if (Input.GetKeyDown(KeyCode.F) && Mode.mode == TypeMode.WALKING)
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 EnterCarMode();
             }
+
         }
         else
         {
@@ -49,12 +52,22 @@ public class PlayerCar : MonoBehaviour
     void EnterCarMode()
     {
         Mode.mode = TypeMode.DRIVING;
+
+        transform.localScale = new Vector3(0, 0, 0);
+        carCamera.gameObject.SetActive(true);
+        playerCamera.gameObject.SetActive(false);
+
         instructionText.gameObject.SetActive(false);
     }
 
     void ExitCarMode()
     {
         Mode.mode = TypeMode.WALKING;
+
+        transform.localScale = new Vector3(1, 1, 1);
+        carCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.SetActive(true);
+
         instructionText.gameObject.SetActive(false);
     }
 }
