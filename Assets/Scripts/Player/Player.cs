@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class Player : GObject
 {
     [HideInInspector] public int money, energy;
-    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI healthText, bulletText, energyText;
 
     void Start()
     {
@@ -31,11 +32,11 @@ public class Player : GObject
     }
 
     public void RefillHealth(int amount){
-        health += amount;
+        health = Math.Min(100, health + amount);
     }
 
     public void RefillEnergy(int amount){
-        energy += amount;
+        energy = Math.Min(100, energy + amount);
     }
 
 }

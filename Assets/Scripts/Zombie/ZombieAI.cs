@@ -45,6 +45,8 @@ public class ZombieAI : MonoBehaviour
 
             case ZombieState.Wandering:
                 animator.SetTrigger("walk");
+                animator.ResetTrigger("idle");
+                animator.ResetTrigger("attack1");
                 timer += Time.deltaTime;
 
                 if (timer >= wanderTime)
@@ -62,6 +64,8 @@ public class ZombieAI : MonoBehaviour
 
             case ZombieState.Chasing:
                 animator.SetTrigger("walk");
+                animator.ResetTrigger("idle");
+                animator.ResetTrigger("attack1");
                 agent.SetDestination(player.position);
 
                 if (distanceToPlayer <= attackRange)
@@ -75,6 +79,8 @@ public class ZombieAI : MonoBehaviour
                 break;
 
             case ZombieState.Attacking:
+                animator.ResetTrigger("idle");
+                animator.ResetTrigger("walk");
                 animator.SetTrigger("attack1");
 
                 if (distanceToPlayer > attackRange)
