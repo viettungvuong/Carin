@@ -7,12 +7,17 @@ using UnityEngine;
 public class Player : GObject
 {
     [HideInInspector] public int money, energy;
-    public TextMeshProUGUI healthText, bulletText, energyText;
+    public TextMeshProUGUI healthText, energyText;
 
     void Start()
     {
         money = 1000;
         energy = 100;
+    }
+
+    private void Update() {
+        healthText.text = health.ToString();
+        energyText.text = energy.ToString();
     }
 
     
@@ -38,5 +43,15 @@ public class Player : GObject
     public void RefillEnergy(int amount){
         energy = Math.Min(100, energy + amount);
     }
+
+    protected override void Die()
+    {
+        
+    }
+
+    // player attack using gun only
+    // private void OnCollisionEnter(Collision other) {
+
+    // }
 
 }

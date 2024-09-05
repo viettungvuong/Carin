@@ -8,7 +8,6 @@ public class ZombieAI : MonoBehaviour
     public float attackRange = 2f;
     public float wanderRadius = 5f;
     public float wanderTime = 3f;
-    public int damage = 10;
 
     private NavMeshAgent agent;
     private float timer;
@@ -100,10 +99,5 @@ public class ZombieAI : MonoBehaviour
         return navHit.position;
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Player")){
-            Player player = other.gameObject.GetComponent<Player>();
-            player.TakeDamage(damage);
-        }
-    }
+
 }

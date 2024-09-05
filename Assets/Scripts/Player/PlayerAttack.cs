@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,11 +13,13 @@ public class PlayerAttack : MonoBehaviour
 
     private int bullets = 10;
     private int bulletsInClip = 3;
+    public TextMeshProUGUI bulletText;
 
     static bool shot = false;
 
     void Update()
     {
+        bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
         if (Input.GetKeyDown(KeyCode.Space) && !shot)
         {
             shot = true;

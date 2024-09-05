@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 8644994619728211294}
   - component: {fileID: 3894633951010245782}
   - component: {fileID: 3856888253855887876}
+  - component: {fileID: -5893341217483610379}
   m_Layer: 6
   m_Name: Zombie
   m_TagString: Untagged
@@ -967,7 +968,6 @@ MonoBehaviour:
   attackRange: 2
   wanderRadius: 5
   wanderTime: 3
-  damage: 10
 --- !u!195 &8644994619728211294
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1038,6 +1038,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.5649431, z: 1}
   m_Center: {x: 0, y: 0.80467737, z: 0}
+--- !u!114 &-5893341217483610379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663296928905127862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61f468227d1c45328be7ae5ec54be56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  damage: 10
 --- !u!1 &2692635567064402317
 GameObject:
   m_ObjectHideFlags: 0
