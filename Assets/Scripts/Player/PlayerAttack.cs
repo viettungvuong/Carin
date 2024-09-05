@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -8,6 +9,9 @@ public class PlayerAttack : MonoBehaviour
     public Transform rifle, muzzle;
     public float bulletForce;
     public ParticleSystem muzzleFlash;
+
+    private int bullets = 10;
+    private int bulletsInClip = 3;
 
     static bool shot = false;
 
@@ -38,5 +42,9 @@ public class PlayerAttack : MonoBehaviour
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.AddForce(transform.forward * bulletForce, ForceMode.Impulse);
         muzzleFlash.Play();
+    }
+
+    public void RefillBullets(int amount){
+        bullets += amount;
     }
 }

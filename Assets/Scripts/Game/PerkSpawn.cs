@@ -10,11 +10,13 @@ public class PerkSpawn : MonoBehaviour
     public GameObject bulletRefill;
 
 
-    public Vector2 spawnAreaMin;
-    public Vector2 spawnAreaMax;
+    private float xMin=-630, xMax=-65;
+    private float zMin=-269, zMax = 12;
+
+    const float y = 14f;
 
 
-    public int numberOfPerksToSpawn = 5;
+    public int numberOfPerksToSpawn = 25;
 
     // Start is called before the first frame update
     void Start()
@@ -25,21 +27,23 @@ public class PerkSpawn : MonoBehaviour
     // spawn
     void SpawnPerks()
     {
+        // get random pos
+        Vector3 GetRandomPosition()
+        {
+            float randomX = Random.Range(xMin, xMax);
+            float randomZ = Random.Range(zMin, zMax);
+            return new Vector3(randomX, y, randomZ);
+        }
+
         for (int i = 0; i < numberOfPerksToSpawn; i++)
         {
-            Vector2 randomPosition = GetRandomPosition();
+            Vector3 randomPosition = GetRandomPosition();
             GameObject perkToSpawn = GetRandomPerk();
             Instantiate(perkToSpawn, randomPosition, Quaternion.identity);
         }
     }
 
-    // get random pos
-    Vector2 GetRandomPosition()
-    {
-        float randomX = Random.Range(spawnAreaMin.x, spawnAreaMax.x);
-        float randomY = Random.Range(spawnAreaMin.y, spawnAreaMax.y);
-        return new Vector2(randomX, randomY);
-    }
+
 
     GameObject GetRandomPerk()
     {

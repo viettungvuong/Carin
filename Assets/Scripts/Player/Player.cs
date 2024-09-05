@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Player : GObject
 {
-    [HideInInspector] public int money;
+    [HideInInspector] public int money, energy;
     public TextMeshProUGUI healthText;
 
     void Start()
     {
         money = 1000;
+        energy = 100;
     }
 
     
@@ -29,5 +30,12 @@ public class Player : GObject
         money += amount;
     }
 
+    public void RefillHealth(int amount){
+        health += amount;
+    }
+
+    public void RefillEnergy(int amount){
+        energy += amount;
+    }
 
 }
