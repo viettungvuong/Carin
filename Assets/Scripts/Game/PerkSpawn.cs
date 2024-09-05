@@ -10,10 +10,10 @@ public class PerkSpawn : MonoBehaviour
     public GameObject bulletRefill;
 
 
-    private float xMin=-630, xMax=-65;
+    private float xMin=-630, xMax=330;
     private float zMin=-269, zMax = 12;
 
-    const float y = 14f;
+    const float y = 6f;
 
 
     public int numberOfPerksToSpawn = 25;
@@ -39,7 +39,9 @@ public class PerkSpawn : MonoBehaviour
         {
             Vector3 randomPosition = GetRandomPosition();
             GameObject perkToSpawn = GetRandomPerk();
-            Instantiate(perkToSpawn, randomPosition, Quaternion.identity);
+            float randomYAngle = Random.Range(0f, 360f);
+            Quaternion rotation = Quaternion.Euler(0, randomYAngle, 0);
+            Instantiate(perkToSpawn, randomPosition, rotation);
         }
     }
 
