@@ -9,19 +9,29 @@ public enum RefillType{
 }
 public class RefillButton : MonoBehaviour
 {
+    GameObject player;
     public RefillType refillType;
+
+    private Player playerComponent;
+    private PlayerAttack playerAttack;
+
+    private void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerComponent = player.GetComponent<Player>();
+        playerAttack = player.GetComponent<PlayerAttack>();
+    }
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player")){
+        if (other.gameObject.CompareTag("Player")||other.gameObject.CompareTag("Car")){
             // refill respectively
             switch (refillType){
                 case RefillType.Energy:
-                    other.gameObject.GetComponent<Player>().RefillEnergy(10);
+                    playerComponent.RefillEnergy(10);
                     break;
                 case RefillType.Health:
-                    other.gameObject.GetComponent<Player>().RefillHealth(10);
+                    playerComponent.RefillHealth(10);
                     break;
                 case RefillType.Bullet:
-                    other.gameObject.GetComponent<PlayerAttack>().RefillBullets(10);
+                    playerAttack.RefillBullets(10);
                     break;
             
             }
