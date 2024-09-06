@@ -23,7 +23,10 @@ public class RefillButton : MonoBehaviour
                 case RefillType.Bullet:
                     other.gameObject.GetComponent<PlayerAttack>().RefillBullets(10);
                     break;
+            
             }
+
+            this.gameObject.SetActive(false);
         }
     }
 }
