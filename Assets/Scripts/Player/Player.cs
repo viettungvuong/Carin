@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class Player : GObject
 {
-    [HideInInspector] public int money = 1000, energy = 100;
-    public TextMeshProUGUI healthText, energyText;
+    [HideInInspector] public int money, energy;
+    public TextMeshProUGUI healthText, energyText, moneyText;
 
 
     private void Start() {
         energy = 100;
         health = 100;
+        money = 100;
     }
     private void Update() {
         healthText.text = health.ToString();
         energyText.text = energy.ToString();
+        moneyText.text = money.ToString();
     }
 
     

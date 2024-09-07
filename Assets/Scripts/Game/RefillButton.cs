@@ -5,7 +5,8 @@ using UnityEngine;
 public enum RefillType{
     Energy,
     Health,
-    Bullet
+    Bullet,
+    Money
 }
 public class RefillButton : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class RefillButton : MonoBehaviour
                     break;
                 case RefillType.Bullet:
                     playerAttack.RefillBullets(10);
+                    break;
+                case RefillType.Money:
+                    playerComponent.AddMoney(10);
                     break;
             
             }
