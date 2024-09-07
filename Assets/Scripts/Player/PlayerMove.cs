@@ -14,7 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        const string shootAnimation = "Shoot";
+        const string shootAnimation = "fire";
         
 
         if (Input.GetKey(KeyCode.Q))

@@ -14,6 +14,8 @@ public abstract class GObject : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        Debug.Log("Taken damage");
+        Debug.Log(health);
         if (health <= 0)
         {
             health = 0;
