@@ -21,9 +21,8 @@ public class BulletControl : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        GObject gObject = other.gameObject.GetComponent<GObject>();
-        if (gObject!=null){
-            gObject.TakeDamage(damage);
+        else if (other.gameObject.CompareTag("Zombie")){
+            other.gameObject.GetComponent<Zombie>().TakeDamage(damage);
         }
     }
 }

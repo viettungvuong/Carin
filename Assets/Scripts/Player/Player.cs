@@ -51,6 +51,7 @@ public class Player : GObject
     {
         healthText.text = health.ToString();
         animator.SetTrigger("fall");
+        transform.position = new Vector3(transform.position.x, 3.8f);
         // die
     }
 

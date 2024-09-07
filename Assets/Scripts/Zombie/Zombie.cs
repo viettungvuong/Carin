@@ -21,5 +21,6 @@ public class Zombie : GObject
     protected override void Die()
     {
         animator.SetTrigger("fall");
+        transform.position = new Vector3(transform.position.x, 3.8f);
     }
 }
