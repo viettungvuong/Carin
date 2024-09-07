@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
-        if (Input.GetKeyDown(KeyCode.Space) && !shot)
+        if (bullets>0&&Input.GetKeyDown(KeyCode.Space) && !shot)
         {
             shot = true;
             playerAnim.SetTrigger("fire");

@@ -9,7 +9,7 @@ public class ZombieSpawn : ObjectSpawn
 
     void Awake() {
         objectTag = "Zombie";
-        spawnNumber = 5;
+        spawnNumber = 2;
     }
 
     private new void Start() {

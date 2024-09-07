@@ -57,7 +57,7 @@ public class PlayerCar : MonoBehaviour
             }
         }
         else
-        {
+        { // not driving
             carRunSlider.gameObject.SetActive(false);
         }
 
@@ -114,5 +114,6 @@ public class PlayerCar : MonoBehaviour
 
         zombieSpawn.enabled = true;
         carZombieSpawn.enabled = false;
+        transform.position = car.transform.position + new Vector3(2f,0,0); // player at car
     }
 }

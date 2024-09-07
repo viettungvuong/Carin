@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class Minimap : MonoBehaviour
 {
-    public Transform player;
+    public Transform player, car;
     
     void LateUpdate() {
-        Vector3 newPosition = player.position;
+        Vector3 follow;
+        float eulerAngles;
+        if (Mode.mode==TypeMode.WALKING){
+            follow = player.position;
+            eulerAngles = player.eulerAngles.y;
+        }
+        else{
+            follow = car.position;
+            eulerAngles = car.eulerAngles.y;
+        }
+        Vector3 newPosition = follow;
         newPosition.y = transform.position.y;
         transform.position = newPosition;
 
-        transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(90f, eulerAngles, 0f);
     }
 }
