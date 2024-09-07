@@ -4,12 +4,9 @@ using UnityEngine;
 
 public abstract class GObject : MonoBehaviour
 {
-    [HideInInspector] public int health;
+    [HideInInspector] public int health = 100;
 
-    void Start()
-    {
-        health = 100;
-    }
+
 
     protected abstract void Die();
 

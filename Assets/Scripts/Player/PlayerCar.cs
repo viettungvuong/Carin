@@ -6,26 +6,31 @@ using UnityEngine.UI;
 public class PlayerCar : MonoBehaviour
 {
     public TextMeshProUGUI instructionText; 
-    public Transform car;
+    public GameObject car;
     public Camera carCamera, playerCamera;
     public string interactKey = "F";
     public float interactionDistance = 5f;
-    public float carDuration = 60f; // duration driving a car (in seconds)
+    public float carDuration = 30f; // duration driving a car (in seconds)
 
     private DateTime lastOpenedCar;
-    private bool isDriving = false;
 
     public Slider carRunSlider;
 
+    private ZombieSpawn zombieSpawn, carZombieSpawn;
+
     void Start()
     {
+
+        zombieSpawn = GetComponent<ZombieSpawn>();
+        carZombieSpawn = car.GetComponent<ZombieSpawn>();
+
         instructionText.gameObject.SetActive(false); 
         carRunSlider.gameObject.SetActive(false); // Hide slider initially
     }
 
     void Update()
     {
-        float distanceToCar = Vector3.Distance(transform.position, car.position);
+        float distanceToCar = Vector3.Distance(transform.position, car.transform.position);
 
         if (Mode.mode == TypeMode.DRIVING)
         {
@@ -39,8 +44,12 @@ public class PlayerCar : MonoBehaviour
             float remainingTime = Mathf.Max(carDuration - elapsedTime, 0f);
             
             // slider reflect remaining time to drive
-            carRunSlider.value = remainingTime / carDuration;
+            carRunSlider.value = elapsedTime / carDuration;
             carRunSlider.gameObject.SetActive(true);
+
+            // slider follow car
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(car.transform.position + new Vector3(0, 2f, 0)); 
+            carRunSlider.transform.position = screenPosition;
 
             if (remainingTime <= 0f)
             {
@@ -68,12 +77,7 @@ public class PlayerCar : MonoBehaviour
             instructionText.gameObject.SetActive(false);
         }
 
-        if (isDriving)
-        {
-            // slider follow car
-            Vector3 screenPosition = Camera.main.WorldToScreenPoint(car.position + new Vector3(0, 2f, 0)); 
-            carRunSlider.transform.position = screenPosition;
-        }
+
     }
 
     void UpdateInstructionTextPosition()
@@ -86,19 +90,20 @@ public class PlayerCar : MonoBehaviour
     {
         Mode.mode = TypeMode.DRIVING;
         lastOpenedCar = DateTime.Now;
-        isDriving = true;
 
         transform.localScale = new Vector3(0, 0, 0);
         carCamera.gameObject.SetActive(true);
         playerCamera.gameObject.SetActive(false);
 
         instructionText.gameObject.SetActive(false);
+
+        zombieSpawn.enabled = false;
+        carZombieSpawn.enabled = true;
     }
 
     void ExitCarMode()
     {
         Mode.mode = TypeMode.WALKING;
-        isDriving = false;
 
         transform.localScale = new Vector3(1, 1, 1);
         carCamera.gameObject.SetActive(false);
@@ -106,5 +111,8 @@ public class PlayerCar : MonoBehaviour
 
         instructionText.gameObject.SetActive(false);
         carRunSlider.gameObject.SetActive(false); // hide slider when not driving
+
+        zombieSpawn.enabled = true;
+        carZombieSpawn.enabled = false;
     }
 }

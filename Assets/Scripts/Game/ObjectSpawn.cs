@@ -7,15 +7,14 @@ public abstract class ObjectSpawn : MonoBehaviour
     protected int spawnNumber;
     protected string objectTag;
 
-    public Transform player;
     public float spawnRadius = 5f;
     public float spawnDistance=20f;
     public LayerMask zombieLayer;
 
     protected Vector3 lastPosition;
 
-    private void Start() {
-        lastPosition = player.position;
+    protected void Start() {
+        lastPosition = transform.position;
     }
 
 

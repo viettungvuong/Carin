@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZombieSpawn : ObjectSpawn
@@ -9,6 +10,11 @@ public class ZombieSpawn : ObjectSpawn
     void Awake() {
         objectTag = "Zombie";
         spawnNumber = 5;
+    }
+
+    private new void Start() {
+        base.Start();
+        Spawn();
     }
 
     void Update()

@@ -13,7 +13,7 @@ public class PerkSpawn : MonoBehaviour
     private float xMin=-630, xMax=330;
     private float zMin=-269, zMax = 12;
 
-    const float y = 5.5f;
+    const float y = 5.2f;
 
 
     public int numberOfPerksToSpawn = 25;
