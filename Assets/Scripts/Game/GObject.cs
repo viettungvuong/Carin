@@ -4,11 +4,12 @@ using UnityEngine;
 
 public abstract class GObject : MonoBehaviour
 {
-    [HideInInspector] public int health = 100;
-
-
-
+    protected int health;
     protected abstract void Die();
+
+    protected void Start() {
+        health = 100;
+    }
 
     public void TakeDamage(int damage)
     {
@@ -21,6 +22,11 @@ public abstract class GObject : MonoBehaviour
             // player
             Die();
         }
+    
+    }
+
+    public bool isDied(){
+        return health <= 0;
     }
 
 }

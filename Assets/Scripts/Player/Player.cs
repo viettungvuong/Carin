@@ -8,12 +8,14 @@ public class Player : GObject
 {
     [HideInInspector] public int money, energy;
     public TextMeshProUGUI healthText, energyText, moneyText;
+    Animator animator;
 
-
-    private void Start() {
+    private new void Start() {
+        base.Start();
         energy = 100;
-        health = 100;
         money = 100;
+
+        animator = GetComponent<Animator>();
     }
     private void Update() {
         healthText.text = health.ToString();
@@ -47,7 +49,9 @@ public class Player : GObject
 
     protected override void Die()
     {
-        
+        healthText.text = health.ToString();
+        animator.SetTrigger("fall");
+        // die
     }
 
     // player attack using gun only

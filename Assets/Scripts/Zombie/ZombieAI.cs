@@ -16,16 +16,23 @@ public class ZombieAI : MonoBehaviour
     private enum ZombieState { Idle, Wandering, Chasing, Attacking }
     private ZombieState currentState = ZombieState.Idle;
 
+    Zombie zombie;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         timer = wanderTime;
 
         animator = GetComponent<Animator>();
+
+        zombie = GetComponent<Zombie>();
     }
 
     void Update()
     {
+        if (zombie.isDied()){
+            return;
+        }
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         switch (currentState)
