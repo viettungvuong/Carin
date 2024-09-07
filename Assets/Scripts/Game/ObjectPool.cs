@@ -10,7 +10,8 @@ public class ObjectPool : MonoBehaviour
         public GameObject prefab;
         public int size;
     }
-
+    GameObject player;
+    public float distanceThreshold = 20f;
     public List<Pool> pools; // Different types of pools
     private static Dictionary<string, Queue<GameObject>> poolDictionary; // Pools corresponding to tags
     private static List<Pair<GameObject, string>> spawnedObjects;
@@ -36,6 +37,10 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    private void Start() {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     private void LateUpdate()
     {
         for (int i = spawnedObjects.Count - 1; i >= 0; i--)
@@ -44,7 +49,8 @@ public class ObjectPool : MonoBehaviour
             GameObject gObject = pair.First;
             string tag = pair.Second;
 
-            if (!gObject.activeInHierarchy) // If the object is not active in the game
+            if (!gObject.activeInHierarchy||Vector3.Distance(gObject.transform.position, player.transform.position)>=distanceThreshold) 
+            // If the object is not active in the game or too far from player
             {
                 // Debug.Log("Put back into the pool");
                 DespawnToPool(gObject, tag); // Enqueue it back into the pool

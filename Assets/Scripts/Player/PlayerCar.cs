@@ -17,10 +17,11 @@ public class PlayerCar : MonoBehaviour
     public Slider carRunSlider;
 
     private ZombieSpawn zombieSpawn, carZombieSpawn;
+    private Rigidbody rb;
 
     void Start()
     {
-
+        rb = GetComponent<Rigidbody>();
         zombieSpawn = GetComponent<ZombieSpawn>();
         carZombieSpawn = car.GetComponent<ZombieSpawn>();
 
@@ -80,6 +81,13 @@ public class PlayerCar : MonoBehaviour
 
     }
 
+    private void LateUpdate() {
+        if (Mode.mode == TypeMode.DRIVING){
+            rb.position = car.transform.position + car.transform.right;
+        }
+
+    }
+
     void UpdateInstructionTextPosition()
     {
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
@@ -117,7 +125,6 @@ public class PlayerCar : MonoBehaviour
         zombieSpawn.enabled = true;
         carZombieSpawn.enabled = false;
 
-        GetComponent<Rigidbody>().position = car.transform.position;
         // transform.SetParent(null); // no longer need move player with car
     }
 }
