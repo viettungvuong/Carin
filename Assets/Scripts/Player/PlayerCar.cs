@@ -117,7 +117,7 @@ public class PlayerCar : MonoBehaviour
         zombieSpawn.enabled = true;
         carZombieSpawn.enabled = false;
 
-        GetComponent<Rigidbody>().position = car.GetComponent<Rigidbody>().position;
+        GetComponent<Rigidbody>().position = car.transform.position;
         // transform.SetParent(null); // no longer need move player with car
     }
 }
