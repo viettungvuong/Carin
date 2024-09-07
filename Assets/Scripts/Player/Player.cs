@@ -10,7 +10,10 @@ public class Player : GObject
     public TextMeshProUGUI healthText, energyText;
 
 
-
+    private void Start() {
+        energy = 100;
+        health = 100;
+    }
     private void Update() {
         healthText.text = health.ToString();
         energyText.text = energy.ToString();
