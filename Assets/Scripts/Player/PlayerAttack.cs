@@ -25,6 +25,10 @@ public class PlayerAttack : MonoBehaviour
             shot = true;
             playerAnim.SetTrigger("fire");
             StartCoroutine(DelayedShoot());
+            bullets--;
+
+            bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
+
         }
 
         if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))

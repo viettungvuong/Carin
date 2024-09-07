@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        animator = transform.parent.GetComponent<Animator>();
+        animator = transform.GetComponent<Animator>();
     }
 
     void Update()
