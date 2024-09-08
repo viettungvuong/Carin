@@ -18,17 +18,23 @@ public class PlayerAttack : MonoBehaviour
     
     static bool shot = false;
 
+
     void Update()
     {
+
         bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
         if (bullets > 0 && Input.GetKeyDown(KeyCode.Space) && !shot)
         {
+
+
             shot = true;
             playerAnim.SetTrigger("fire");
             StartCoroutine(DelayedShoot());
             bullets--;
 
             bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
+
+
         }
 
         if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))
