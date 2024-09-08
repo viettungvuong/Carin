@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Animator playerAnim;
     public Transform rifle, muzzle;
     public Transform cameraTransform; // Reference to the Camera's transform
     public float bulletForce;
@@ -43,18 +42,13 @@ public class PlayerAttack : MonoBehaviour
         if (bullets > 0 && Input.GetKeyDown(KeyCode.Space) && !shot)
         {
             shot = true;
-            playerAnim.SetTrigger("fire");
             StartCoroutine(DelayedShoot());
             bullets--;
 
             bulletText.text = bullets.ToString() + "/" + bulletsInClip.ToString();
         }
 
-        // Reset shot flag when not firing
-        if (!playerAnim.GetCurrentAnimatorStateInfo(0).IsName("Fire"))
-        {
-            shot = false;
-        }
+
     }
 
     private IEnumerator DelayedShoot()
