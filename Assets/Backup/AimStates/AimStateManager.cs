@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class AimStateManager : MonoBehaviour
@@ -30,6 +30,8 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] LayerMask targetLayer;
 
+    [SerializeField] GameObject aimingReticle; 
+
     private static bool shot = false;
 
     void Start()
@@ -38,6 +40,7 @@ public class AimStateManager : MonoBehaviour
         hipFov = vCam.m_Lens.FieldOfView;
         anim = GetComponent<Animator>();
         SwitchState(Hip);
+        aimingReticle.gameObject.SetActive(false);  
     }
 
     void Update()
@@ -63,20 +66,24 @@ public class AimStateManager : MonoBehaviour
 
         Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = mainCamera.ScreenPointToRay(screenCentre);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
+        {
             aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);  
+            aimingReticle.transform.position = screenPos; 
+        }
+        // aimingReticle.transform.position = aimPos.position;
 
-        // Slight camera rotation to the left when aiming
         if (currentState == Aim)
         {
-            camFollowPos.localEulerAngles = new Vector3(yAxis, -10f, camFollowPos.localEulerAngles.z);
+            aimingReticle.gameObject.SetActive(true); 
         }
         else
         {
-            camFollowPos.localEulerAngles = new Vector3(yAxis, 0f, camFollowPos.localEulerAngles.z);
+            aimingReticle.gameObject.SetActive(false); 
         }
     }
+
 
     private void HandleShooting()
     {
