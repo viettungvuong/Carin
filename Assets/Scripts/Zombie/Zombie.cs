@@ -12,7 +12,7 @@ public class Zombie : GObject
         animator = GetComponent<Animator>();
     }
     private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.CompareTag("Player")){
+        if (!isDied()&&other.gameObject.CompareTag("Player")){
             other.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
 
@@ -21,6 +21,6 @@ public class Zombie : GObject
     protected override void Die()
     {
         animator.SetTrigger("fall");
-        transform.position = new Vector3(transform.position.x, 4.2f);
+        // transform.position = new Vector3(transform.position.x, 4.2f);
     }
 }

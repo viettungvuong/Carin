@@ -106,7 +106,7 @@ public class AimStateManager : MonoBehaviour
         muzzleFlash.Play();
 
         RaycastHit hit;
-        if (Physics.Raycast(muzzle.position, muzzle.forward, out hit, range, targetLayer))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, range, targetLayer))
         {
             if (hit.collider.gameObject.CompareTag("Zombie"))
             {

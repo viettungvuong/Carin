@@ -65,7 +65,7 @@ public class PlayerCar : MonoBehaviour
         if (Mode.mode == TypeMode.WALKING && distanceToCar <= interactionDistance) // show instruction text when near a car
         {
             instructionText.gameObject.SetActive(true);
-            instructionText.text = interactKey + ": Drive";
+            instructionText.text = interactKey + ": Drive\n$100";
             UpdateInstructionTextPosition();
             
             if (Input.GetKeyDown(KeyCode.F))
