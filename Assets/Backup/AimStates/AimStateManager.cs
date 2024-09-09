@@ -105,8 +105,10 @@ public class AimStateManager : MonoBehaviour
     {
         muzzleFlash.Play();
 
+        Vector3 shootDirection = (aimPos.position - transform.position).normalized;
+
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range, targetLayer))
+        if (Physics.Raycast(transform.position, shootDirection, out hit, range, targetLayer))
         {
             if (hit.collider.gameObject.CompareTag("Zombie"))
             {
@@ -120,6 +122,7 @@ public class AimStateManager : MonoBehaviour
             }
         }
     }
+
 
     public void SwitchState(AimBaseState state)
     {
