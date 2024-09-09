@@ -4,36 +4,41 @@ using UnityEngine;
 
 public class PerkSpawn : MonoBehaviour
 {
-    // Prefabs for the perks
     public GameObject energyRefill;
     public GameObject healthRefill;
     public GameObject bulletRefill;
     public GameObject moneyRefill;
 
-
-    private float xMin=-630, xMax=330;
-    private float zMin=-269, zMax = 12;
-
-    const float y = 5.2f;
-
+    private float xMin = -630, xMax = 330;
+    private float zMin = -269, zMax = 12;
 
     public int numberOfPerksToSpawn = 25;
 
-    // Start is called before the first frame update
+    [SerializeField] LayerMask cityGroundLayer; 
+
     void Start()
     {
         SpawnPerks();
     }
 
-    // spawn
     void SpawnPerks()
     {
-        // get random pos
         Vector3 GetRandomPosition()
         {
             float randomX = Random.Range(xMin, xMax);
             float randomZ = Random.Range(zMin, zMax);
-            return new Vector3(randomX, y, randomZ);
+
+            // raycast downward to find CityGround layer position => y position
+            Ray ray = new Ray(new Vector3(randomX, 10f, randomZ), Vector3.down);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, cityGroundLayer))
+            {
+                return new Vector3(randomX, hit.point.y + 0.5f, randomZ);
+            }
+
+            // if raycast fail
+            return new Vector3(randomX, 5.5f, randomZ);
         }
 
         for (int i = 0; i < numberOfPerksToSpawn; i++)
@@ -46,11 +51,9 @@ public class PerkSpawn : MonoBehaviour
         }
     }
 
-
-
     GameObject GetRandomPerk()
     {
-        int randomIndex = Random.Range(0, 4); // 0 = energy, 1 = health, 2 = bullets, 3 = money
+        int randomIndex = Random.Range(0, 4); 
 
         switch (randomIndex)
         {

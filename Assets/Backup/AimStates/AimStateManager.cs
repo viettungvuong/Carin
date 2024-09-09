@@ -69,8 +69,8 @@ public class AimStateManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
         {
             aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);  
-            aimingReticle.transform.position = screenPos; 
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
+            aimingReticle.transform.position = aimPos.position;
         }
         // aimingReticle.transform.position = aimPos.position;
 
