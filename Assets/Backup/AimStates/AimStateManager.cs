@@ -30,7 +30,7 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] LayerMask targetLayer;
 
-    [SerializeField] GameObject aimingReticle; 
+    [SerializeField] Image aimingReticle; 
 
     private static bool shot = false;
 
@@ -70,7 +70,7 @@ public class AimStateManager : MonoBehaviour
         {
             aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
             Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
-            aimingReticle.transform.position = aimPos.position;
+            aimingReticle.transform.position = screenPos;
         }
         // aimingReticle.transform.position = aimPos.position;
 
