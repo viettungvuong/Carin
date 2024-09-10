@@ -49,7 +49,7 @@ public class ObjectPool : MonoBehaviour
             GameObject gObject = pair.First;
             string tag = pair.Second;
 
-            if (!gObject.activeInHierarchy||Vector3.Distance(gObject.transform.position, player.transform.position)>=distanceThreshold) 
+            if (gObject==null||!gObject.activeInHierarchy||Vector3.Distance(gObject.transform.position, player.transform.position)>=distanceThreshold) 
             // If the object is not active in the game or too far from player
             {
                 // Debug.Log("Put back into the pool");
@@ -82,6 +82,7 @@ public class ObjectPool : MonoBehaviour
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
         objectToSpawn.transform.position = position;
+
         objectToSpawn.SetActive(true);
 
         spawnedObjects.Add(new Pair<GameObject, string>(objectToSpawn, tag)); 

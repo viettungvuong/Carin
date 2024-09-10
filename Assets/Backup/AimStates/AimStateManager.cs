@@ -105,10 +105,10 @@ public class AimStateManager : MonoBehaviour
     {
         muzzleFlash.Play();
 
-        Vector3 shootDirection = (aimPos.position - transform.position).normalized;
+        Vector3 shootDirection = (aimPos.position - muzzle.position).normalized;
 
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, shootDirection, out hit, range, targetLayer))
+        if (Physics.Raycast(muzzle.position, shootDirection, out hit, range, targetLayer))
         {
             if (hit.collider.gameObject.CompareTag("Zombie"))
             {
@@ -121,7 +121,18 @@ public class AimStateManager : MonoBehaviour
                 hitRb.AddForce(-hit.normal * bulletForce);
             }
         }
+
+        GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
+
+        // fly desired direction
+        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        if (bulletRb != null)
+        {
+            bulletRb.AddForce(shootDirection * bulletForce, ForceMode.Impulse);
+        }
     }
+
+
 
 
     public void SwitchState(AimBaseState state)
