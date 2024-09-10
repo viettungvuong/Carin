@@ -964,7 +964,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5897738259420688610, guid: 52fbe999a2f6a44539d9a571fd2e1094, type: 3}
-  detectionRange: 10
+  detectionRange: 30
   attackRange: 2
   wanderRadius: 5
   wanderTime: 3
@@ -1050,7 +1050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f468227d1c45328be7ae5ec54be56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   damage: 10
 --- !u!1 &2692635567064402317
 GameObject:
