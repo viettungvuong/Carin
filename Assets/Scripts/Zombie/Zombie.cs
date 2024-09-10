@@ -6,6 +6,7 @@ public class Zombie : GObject
 {
     public int damage = 10;
     Animator animator;
+    public ParticleSystem vfxHit;
 
     private new void Start() {
         base.Start();
@@ -13,6 +14,7 @@ public class Zombie : GObject
     }
     private void OnCollisionEnter(Collision other) {
         if (!isDied()&&other.gameObject.CompareTag("Player")){
+            Instantiate(vfxHit, other.gameObject.transform.position, Quaternion.identity);
             other.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
 
@@ -21,6 +23,12 @@ public class Zombie : GObject
     protected override void Die()
     {
         animator.SetTrigger("fall");
-        // transform.position = new Vector3(transform.position.x, 4.2f);
+        StartCoroutine(DeactivateAfterDelay(2f));
+    }
+
+    private IEnumerator DeactivateAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameObject.SetActive(false);
     }
 }

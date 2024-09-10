@@ -1051,6 +1051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  vfxHit: {fileID: 613433886817584984, guid: 5b4424b7955314956be5516bd773dff3, type: 3}
 --- !u!1 &2692635567064402317
 GameObject:
   m_ObjectHideFlags: 0

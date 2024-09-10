@@ -18,6 +18,8 @@ public class ZombieAI : MonoBehaviour
 
     Zombie zombie;
 
+
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
