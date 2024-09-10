@@ -123,6 +123,7 @@ public class AimStateManager : MonoBehaviour
         }
 
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
+        bullet.transform.rotation = muzzle.rotation;
 
         // fly desired direction
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
+    public ParticleSystem vfx;
     private Rigidbody rb;
     void Start()
     {
@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
+        Instantiate(vfx, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

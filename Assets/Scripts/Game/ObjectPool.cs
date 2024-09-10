@@ -53,7 +53,10 @@ public class ObjectPool : MonoBehaviour
             // If the object is not active in the game or too far from player
             {
                 // Debug.Log("Put back into the pool");
-                DespawnToPool(gObject, tag); // Enqueue it back into the pool
+                if (gObject!=null){
+                    DespawnToPool(gObject, tag); // Enqueue it back into the pool
+                }
+
                 spawnedObjects.RemoveAt(i);
             }
         }
