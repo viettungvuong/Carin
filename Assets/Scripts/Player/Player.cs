@@ -10,6 +10,9 @@ public class Player : GObject
     public TextMeshProUGUI healthText, energyText, moneyText;
     Animator animator;
 
+    [SerializeField] private GameObject diePanel;
+    [SerializeField] private TextMeshProUGUI survivedText;
+
     private new void Start() {
         base.Start();
         energy = 100;
@@ -53,6 +56,9 @@ public class Player : GObject
         animator.SetTrigger("fall");
         // transform.position = new Vector3(transform.position.x, 4f);
         // die
+
+        diePanel.SetActive(true);
+        survivedText.text = "YOU HAVE SURVIVED FOR " + TimeManager.Instance.SurviveTime();
     }
 
     // player attack using gun only

@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -43,6 +48,24 @@ public class TimeManager : MonoBehaviour
                 TogglePause();
             }
         }
+    }
+
+    public string SurviveTime(){
+        string time =  FormatTime(TotalGameTime);
+        List<String> splitTime = time.Split(":").ToList();
+        int i = 0;
+
+        while (i<2) {
+            if (splitTime[i]=="00"){
+                splitTime.RemoveAt(0);
+            }
+            else{
+                break;
+            }
+            i++;
+        }
+        string res = String.Join(":", splitTime);
+        return res;
     }
 
     private string FormatTime(float time)
