@@ -148,7 +148,7 @@ public class AimStateManager : MonoBehaviour
             bulletRb.AddForce(shootDirection * bulletForce, ForceMode.Impulse);
         }
 
-        bulletsInClip--;  // Decrease bullets in clip after shooting
+        bulletsInClip--;  // decrease bullets in clip after shooting
     }
 
     private IEnumerator RefillClip()
@@ -160,6 +160,10 @@ public class AimStateManager : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             refillProgressBar.fillAmount = elapsed / refillDuration;  
+
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position + new Vector3(1, 2, 0));
+            refillProgressBar.transform.position = screenPos;
+
             yield return null;
         }
 
