@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
 
 public class AimStateManager : MonoBehaviour
 {
@@ -33,6 +34,9 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] Image aimingReticle; 
 
     private static bool shot = false;
+    private int bullets = 10;
+    private int bulletsInClip = 3;
+    public TextMeshProUGUI bulletText;
 
     void Start()
     {
@@ -48,6 +52,10 @@ public class AimStateManager : MonoBehaviour
         HandleAiming();
         HandleShooting();
         currentState.UpdateState(this);
+    }
+
+    private void FixedUpdate() {
+        bulletText.text = bulletsInClip.ToString() + "/" + bullets.ToString();
     }
 
     private void LateUpdate()
@@ -87,7 +95,7 @@ public class AimStateManager : MonoBehaviour
 
     private void HandleShooting()
     {
-        if (Input.GetMouseButtonDown(0) && !shot)
+        if (bullets>0&&Input.GetMouseButtonDown(0) && !shot)
         {
             shot = true;
             StartCoroutine(DelayedShoot());
