@@ -13,6 +13,7 @@ public class TimeManager : MonoBehaviour
     public float TotalGameTime { get; private set; }
 
     private bool isPaused;
+    public GameObject pausePanel;
 
     private void Awake()
     {
@@ -60,6 +61,7 @@ public class TimeManager : MonoBehaviour
             isPaused = true;
             Time.timeScale = 0f;
             PauseChanged?.Invoke(isPaused);
+            pausePanel.SetActive(true);
         }
     }
 
@@ -70,6 +72,7 @@ public class TimeManager : MonoBehaviour
             isPaused = false;
             Time.timeScale = 1f;
             PauseChanged?.Invoke(isPaused);
+            pausePanel.SetActive(false);
         }
     }
 
