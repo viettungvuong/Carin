@@ -155,13 +155,13 @@ public class AimStateManager : MonoBehaviour
     {
         isRefilling = true;
         float elapsed = 0f;
-
+        refillProgressBar.gameObject.SetActive(true);
         while (elapsed < refillDuration)
         {
             elapsed += Time.deltaTime;
             refillProgressBar.fillAmount = elapsed / refillDuration;  
 
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position + new Vector3(1, 2, 0));
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(transform.position + new Vector3(0, 2, 0));
             refillProgressBar.transform.position = screenPos;
 
             yield return null;
@@ -172,6 +172,7 @@ public class AimStateManager : MonoBehaviour
         bullets -= refillAmount;  
         isRefilling = false;
         refillProgressBar.fillAmount = 0f;  
+        refillProgressBar.gameObject.SetActive(false);
     }
 
     public void SwitchState(AimBaseState state)
