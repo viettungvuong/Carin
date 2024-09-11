@@ -26,6 +26,7 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] LayerMask aimMask;
 
     [SerializeField] Transform muzzle;
+
     [SerializeField] float bulletForce = 100f;
     [SerializeField] float range = 100f;
     [SerializeField] ParticleSystem muzzleFlash;
@@ -33,6 +34,8 @@ public class AimStateManager : MonoBehaviour
 
     [SerializeField] Image aimingReticle;
     [SerializeField] private Image refillProgressBar;  
+    [SerializeField] float hipFireDistance = 10f; 
+
 
     private static bool shot = false;
     private int bullets = 10;
@@ -83,24 +86,26 @@ public class AimStateManager : MonoBehaviour
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed * Time.deltaTime);
 
-        Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
-        Ray ray = mainCamera.ScreenPointToRay(screenCentre);
-        if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
-        {
-            aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
-            Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
-            aimingReticle.transform.position = screenPos;
-        }
-
         if (currentState == Aim)
         {
+            Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
+            Ray ray = mainCamera.ScreenPointToRay(screenCentre);
+            if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
+            {
+                aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
+            }
             aimingReticle.gameObject.SetActive(true);
         }
-        else
+        else // when not aiming
         {
+            aimPos.position = transform.position + transform.forward * hipFireDistance;
             aimingReticle.gameObject.SetActive(false);
         }
+
+        Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
+        aimingReticle.transform.position = screenPos;
     }
+
 
     private void HandleShooting()
     {
