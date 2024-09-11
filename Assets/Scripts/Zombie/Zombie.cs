@@ -6,7 +6,6 @@ public class Zombie : GObject
 {
     public int damage = 10;
     Animator animator;
-    public ParticleSystem vfxHit;
 
     private new void Start() {
         base.Start();
@@ -14,7 +13,6 @@ public class Zombie : GObject
     }
     private void OnCollisionEnter(Collision other) {
         if (!isDied()&&other.gameObject.CompareTag("Player")){
-            Instantiate(vfxHit, other.gameObject.transform.position, Quaternion.identity);
             other.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
 

@@ -1704,6 +1704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61f468227d1c45328be7ae5ec54be56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodVfx: {fileID: 198000011254678926, guid: 24af33d531e3842238325e83a4e0258a, type: 3}
   damage: 10
   vfxHit: {fileID: 613433886817584984, guid: 5b4424b7955314956be5516bd773dff3, type: 3}
 --- !u!1 &4921054072355772944

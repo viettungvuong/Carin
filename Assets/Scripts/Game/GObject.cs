@@ -6,6 +6,7 @@ public abstract class GObject : MonoBehaviour
 {
     protected int health;
     protected abstract void Die();
+    public ParticleSystem bloodVfx;
 
     protected void Start() {
         health = 100;
@@ -23,6 +24,9 @@ public abstract class GObject : MonoBehaviour
             // player
             Die();
         }
+
+        ParticleSystem blood = Instantiate(bloodVfx, transform.position + transform.forward * 1.0f + new Vector3(0, 1, 0), Quaternion.identity);
+        blood.transform.SetParent(transform);
     
     }
 
