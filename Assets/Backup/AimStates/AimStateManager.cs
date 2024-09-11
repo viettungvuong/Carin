@@ -31,11 +31,15 @@ public class AimStateManager : MonoBehaviour
     [SerializeField] ParticleSystem muzzleFlash;
     [SerializeField] LayerMask targetLayer;
 
-    [SerializeField] Image aimingReticle; 
+    [SerializeField] Image aimingReticle;
+    [SerializeField] private Image refillProgressBar;  
 
     private static bool shot = false;
     private int bullets = 10;
     private int bulletsInClip = 3;
+    private bool isRefilling = false;
+    private float refillDuration = 2f;  // refill time
+
     public TextMeshProUGUI bulletText;
 
     void Start()
@@ -44,7 +48,8 @@ public class AimStateManager : MonoBehaviour
         hipFov = vCam.m_Lens.FieldOfView;
         anim = GetComponent<Animator>();
         SwitchState(Hip);
-        aimingReticle.gameObject.SetActive(false);  
+        aimingReticle.gameObject.SetActive(false);
+        refillProgressBar.fillAmount = 0f; 
     }
 
     void Update()
@@ -52,9 +57,15 @@ public class AimStateManager : MonoBehaviour
         HandleAiming();
         HandleShooting();
         currentState.UpdateState(this);
+
+        if (bulletsInClip <= 0 && bullets>0 && !isRefilling)
+        {
+            StartCoroutine(RefillClip());
+        }
     }
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         bulletText.text = bulletsInClip.ToString() + "/" + bullets.ToString();
     }
 
@@ -80,22 +91,20 @@ public class AimStateManager : MonoBehaviour
             Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
             aimingReticle.transform.position = screenPos;
         }
-        // aimingReticle.transform.position = aimPos.position;
 
         if (currentState == Aim)
         {
-            aimingReticle.gameObject.SetActive(true); 
+            aimingReticle.gameObject.SetActive(true);
         }
         else
         {
-            aimingReticle.gameObject.SetActive(false); 
+            aimingReticle.gameObject.SetActive(false);
         }
     }
 
-
     private void HandleShooting()
     {
-        if (bullets>0&&Input.GetMouseButtonDown(0) && !shot)
+        if (bulletsInClip > 0 && Input.GetMouseButtonDown(0) && !shot)
         {
             shot = true;
             StartCoroutine(DelayedShoot());
@@ -104,7 +113,7 @@ public class AimStateManager : MonoBehaviour
 
     private IEnumerator DelayedShoot()
     {
-        yield return new WaitForSeconds(0.1f);  // Slight delay for shooting
+        yield return new WaitForSeconds(0.1f);  
         Shoot();
         shot = false;
     }
@@ -133,16 +142,33 @@ public class AimStateManager : MonoBehaviour
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
         bullet.transform.rotation = muzzle.rotation;
 
-        // fly desired direction
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         if (bulletRb != null)
         {
             bulletRb.AddForce(shootDirection * bulletForce, ForceMode.Impulse);
         }
+
+        bulletsInClip--;  // Decrease bullets in clip after shooting
     }
 
+    private IEnumerator RefillClip()
+    {
+        isRefilling = true;
+        float elapsed = 0f;
 
+        while (elapsed < refillDuration)
+        {
+            elapsed += Time.deltaTime;
+            refillProgressBar.fillAmount = elapsed / refillDuration;  
+            yield return null;
+        }
 
+        int refillAmount = Mathf.Min(3, bullets);
+        bulletsInClip = refillAmount;  
+        bullets -= refillAmount;  
+        isRefilling = false;
+        refillProgressBar.fillAmount = 0f;  
+    }
 
     public void SwitchState(AimBaseState state)
     {
