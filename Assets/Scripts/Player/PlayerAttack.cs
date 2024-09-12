@@ -58,7 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        Handleaiming();
+        HandleAiming();
         HandleShooting();
         currentState.UpdateState(this);
 
@@ -77,9 +77,10 @@ public class PlayerAttack : MonoBehaviour
     {
         camFollowPos.localEulerAngles = new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
+
     }
 
-    private void Handleaiming()
+    private void HandleAiming()
     {
         xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
         yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense;
@@ -87,24 +88,24 @@ public class PlayerAttack : MonoBehaviour
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed * Time.deltaTime);
 
+        Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = mainCamera.ScreenPointToRay(screenCentre);
+        if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
+        {
+            aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
+            aimingReticle.transform.position = screenPos;
+        }
+        // aimingReticle.transform.position = aimPos.position;
+
         if (currentState == aim)
         {
-            Vector2 screenCentre = new Vector2(Screen.width / 2, Screen.height / 2);
-            Ray ray = mainCamera.ScreenPointToRay(screenCentre);
-            if (Physics.Raycast(ray, out RaycastHit hit, range, aimMask))
-            {
-                aimPos.position = Vector3.Lerp(aimPos.position, hit.point, aimSmoothSpeed * Time.deltaTime);
-            }
-            aimingReticle.gameObject.SetActive(true);
+            aimingReticle.gameObject.SetActive(true); 
         }
-        else // when not aiming
+        else
         {
-            aimPos.position = transform.position + transform.forward * hipFireDistance;
-            aimingReticle.gameObject.SetActive(false);
+            aimingReticle.gameObject.SetActive(false); 
         }
-
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(aimPos.position);
-        aimingReticle.transform.position = screenPos;
     }
 
 
@@ -128,6 +129,10 @@ public class PlayerAttack : MonoBehaviour
     {
         muzzleFlash.Play();
 
+        if (currentState!=aim){
+            aimPos.position = muzzle.position + muzzle.forward + new Vector3(2, 0, 0);
+        }
+
         Vector3 shootDirection = (aimPos.position - muzzle.position).normalized;
 
         RaycastHit hit;
@@ -146,6 +151,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
+        bullet.gameObject.SetActive(true);
         bullet.transform.rotation = muzzle.rotation;
 
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();

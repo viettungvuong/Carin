@@ -16,9 +16,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
 
-
+        Instantiate(vfx, transform.position, Quaternion.identity);
         if (other.gameObject.CompareTag("Zombie")){
-            Instantiate(vfx, transform.position, Quaternion.identity);
+
             other.gameObject.GetComponent<Zombie>().TakeDamage(100);
         }
         Destroy(gameObject);
