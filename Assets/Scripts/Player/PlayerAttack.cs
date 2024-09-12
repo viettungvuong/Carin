@@ -130,20 +130,20 @@ public class PlayerAttack : MonoBehaviour
 
         Vector3 shootDirection = (aimPos.position - muzzle.position).normalized;
 
-        RaycastHit hit;
-        if (Physics.Raycast(muzzle.position, shootDirection, out hit, range, targetLayer))
-        {
-            if (hit.collider.gameObject.CompareTag("Zombie"))
-            {
-                hit.collider.gameObject.GetComponent<Zombie>().TakeDamage(100);
-            }
+        // RaycastHit hit;
+        // if (Physics.Raycast(muzzle.position, shootDirection, out hit, range, targetLayer))
+        // {
+        //     if (hit.collider.gameObject.CompareTag("Zombie"))
+        //     {
+        //         hit.collider.gameObject.GetComponent<Zombie>().TakeDamage(100);
+        //     }
 
-            Rigidbody hitRb = hit.collider.GetComponent<Rigidbody>();
-            if (hitRb != null)
-            {
-                hitRb.AddForce(-hit.normal * bulletForce);
-            }
-        }
+        //     Rigidbody hitRb = hit.collider.GetComponent<Rigidbody>();
+        //     if (hitRb != null)
+        //     {
+        //         hitRb.AddForce(-hit.normal * bulletForce);
+        //     }
+        // }
 
         GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
         bullet.transform.rotation = muzzle.rotation;
