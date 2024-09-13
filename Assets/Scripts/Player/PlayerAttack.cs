@@ -127,8 +127,9 @@ public class PlayerAttack : MonoBehaviour
     private void Shoot()
     {
         muzzleFlash.Play();
+        Vector3 flyTo = aimPos.position + new Vector3(0,2,0);
 
-        Vector3 shootDirection = (aimPos.position - muzzle.position).normalized;
+        Vector3 shootDirection = (flyTo - muzzle.position).normalized;
 
         // RaycastHit hit;
         // if (Physics.Raycast(muzzle.position, shootDirection, out hit, range, targetLayer))
