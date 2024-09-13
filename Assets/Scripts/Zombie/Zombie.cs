@@ -6,16 +6,23 @@ public class Zombie : GObject
 {
     public int damage = 10;
     Animator animator;
-
+    private bool canDealDamage = true;  
     private new void Start() {
         base.Start();
         animator = GetComponent<Animator>();
     }
-    private void OnCollisionEnter(Collision other) {
-        if (!isDied()&&other.gameObject.CompareTag("Player")){
-            other.gameObject.GetComponent<Player>().TakeDamage(damage);
-        }
 
+    private void OnCollisionStay(Collision other) {
+        if (!isDied() && other.gameObject.CompareTag("Player") && canDealDamage) {
+            other.gameObject.GetComponent<Player>().TakeDamage(damage);
+            StartCoroutine(DamageCooldown(2f));
+        }
+    }
+
+    private IEnumerator DamageCooldown(float cooldown) {
+        canDealDamage = false;
+        yield return new WaitForSeconds(cooldown);
+        canDealDamage = true;
     }
 
     protected override void Die()
