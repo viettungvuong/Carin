@@ -18,7 +18,8 @@ public class ZombieAI : MonoBehaviour
 
     Zombie zombie;
 
-
+    public AudioClip attackClip, walkClip;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -28,19 +29,31 @@ public class ZombieAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         zombie = GetComponent<Zombie>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
-        if (zombie.isDied()){
+        if (zombie.isDied())
+        {
             return;
         }
+        
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         switch (currentState)
         {
             case ZombieState.Idle:
                 animator.SetTrigger("idle");
+
+                // play clip only not already playing and the player is within detection range
+                if (distanceToPlayer <= detectionRange && (audioSource.clip != walkClip || !audioSource.isPlaying))
+                {
+                    audioSource.clip = walkClip;
+                    audioSource.Play();
+                }
+
                 if (distanceToPlayer <= detectionRange)
                 {
                     currentState = ZombieState.Chasing;
@@ -56,6 +69,13 @@ public class ZombieAI : MonoBehaviour
                 animator.ResetTrigger("idle");
                 animator.ResetTrigger("attack1");
                 timer += Time.deltaTime;
+
+
+                if (distanceToPlayer <= detectionRange && (audioSource.clip != walkClip || !audioSource.isPlaying))
+                {
+                    audioSource.clip = walkClip;
+                    audioSource.Play();
+                }
 
                 if (timer >= wanderTime)
                 {
@@ -76,6 +96,13 @@ public class ZombieAI : MonoBehaviour
                 animator.ResetTrigger("attack1");
                 agent.SetDestination(player.position);
 
+
+                if (distanceToPlayer <= detectionRange && (audioSource.clip != walkClip || !audioSource.isPlaying))
+                {
+                    audioSource.clip = walkClip;
+                    audioSource.Play();
+                }
+
                 if (distanceToPlayer <= attackRange)
                 {
                     currentState = ZombieState.Attacking;
@@ -90,6 +117,12 @@ public class ZombieAI : MonoBehaviour
                 animator.ResetTrigger("idle");
                 animator.ResetTrigger("walk");
                 animator.SetTrigger("attack1");
+
+                if (distanceToPlayer <= attackRange && (audioSource.clip != attackClip || !audioSource.isPlaying))
+                {
+                    audioSource.clip = attackClip;
+                    audioSource.Play();
+                }
 
                 if (distanceToPlayer > attackRange)
                 {

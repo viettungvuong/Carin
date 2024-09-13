@@ -28,6 +28,8 @@ public class Zombie : GObject
     protected override void Die()
     {
         animator.SetTrigger("fall");
+        audioSource.clip = dieClip;
+        audioSource.Play();
         StartCoroutine(DeactivateAfterDelay(2f));
     }
 

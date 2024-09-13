@@ -36,6 +36,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Image aimingReticle;
     [SerializeField] private Image refillProgressBar;  
     [SerializeField] float hipFireDistance = 10f; 
+    
 
 
     private static bool shot = false;
@@ -46,6 +47,9 @@ public class PlayerAttack : MonoBehaviour
 
     public TextMeshProUGUI bulletText;
 
+    public AudioClip shotClip;
+    private AudioSource audioSource;
+
     void Start()
     {
         vCam = GetComponentInChildren<CinemachineVirtualCamera>();
@@ -53,7 +57,9 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
         SwitchState(hip);
         aimingReticle.gameObject.SetActive(false);
-        refillProgressBar.fillAmount = 0f; 
+        refillProgressBar.fillAmount = 0f;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -126,6 +132,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Shoot()
     {
+        void PlayShootSfx(){
+            audioSource.clip = shotClip;
+            audioSource.Play();
+        }
         muzzleFlash.Play();
         Vector3 flyTo = aimPos.position + new Vector3(0,2,0);
 
@@ -154,6 +164,8 @@ public class PlayerAttack : MonoBehaviour
         {
             bulletRb.AddForce(shootDirection * bulletForce, ForceMode.Impulse);
         }
+
+        PlayShootSfx();
 
         bulletsInClip--;  // decrease bullets in clip after shooting
     }

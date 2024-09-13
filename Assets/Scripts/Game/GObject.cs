@@ -5,12 +5,18 @@ using UnityEngine;
 public abstract class GObject : MonoBehaviour
 {
     protected int health;
-    protected abstract void Die();
+
     public ParticleSystem bloodVfx;
+
+    public AudioClip dieClip;
+    protected AudioSource audioSource;
 
     protected void Start() {
         health = 100;
+        audioSource = GetComponent<AudioSource>();
     }
+
+    protected abstract void Die();
 
     public void TakeDamage(int damage)
     {

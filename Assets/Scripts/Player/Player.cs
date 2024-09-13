@@ -54,6 +54,8 @@ public class Player : GObject
     {
         healthText.text = health.ToString();
         animator.SetTrigger("fall");
+        audioSource.clip = dieClip;
+        audioSource.Play();
         // transform.position = new Vector3(transform.position.x, 4f);
         // die
 
