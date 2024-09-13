@@ -20,6 +20,9 @@ public class TimeManager : MonoBehaviour
     private bool isPaused;
     public GameObject pausePanel;
 
+    private Player player;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -32,9 +35,15 @@ public class TimeManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
 
     private void Update()
     {
+        if (player.isDied()){
+            return;
+        }
         if (!isPaused)
         {
             TotalGameTime += Time.deltaTime;
@@ -65,6 +74,7 @@ public class TimeManager : MonoBehaviour
             i++;
         }
         string res = String.Join(":", splitTime);
+        Debug.Log(res);
         return res;
     }
 

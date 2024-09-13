@@ -58,7 +58,8 @@ public class Player : GObject
         // die
 
         diePanel.SetActive(true);
-        survivedText.text = "YOU HAVE SURVIVED FOR " + TimeManager.Instance.SurviveTime();
+        string time = TimeManager.Instance.SurviveTime();
+        survivedText.text = "YOU HAVE SURVIVED FOR " + time;
     }
 
     // player attack using gun only
