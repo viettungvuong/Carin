@@ -731,6 +731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodVfx: {fileID: 198000011254678926, guid: 24af33d531e3842238325e83a4e0258a, type: 3}
+  dieClip: {fileID: 0}
   money: 0
   energy: 0
   healthText: {fileID: 0}
@@ -881,6 +882,7 @@ MonoBehaviour:
   refillProgressBar: {fileID: 0}
   hipFireDistance: 10
   bulletText: {fileID: 0}
+  shotClip: {fileID: 0}
 --- !u!1 &2164257231771159063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7459,7 +7461,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 8341161198671653776, guid: a4b30c6c2760c01459fef0863777b5b1, type: 3}
+  m_Mesh: {fileID: -9056706297790775429, guid: 750998db7fd03a34d9b732aa156d66fe, type: 3}
   m_Bones:
   - {fileID: 4578224852466797743}
   - {fileID: 6420713808101022493}

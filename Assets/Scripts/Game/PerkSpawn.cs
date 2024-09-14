@@ -7,7 +7,6 @@ public class PerkSpawn : MonoBehaviour
     public GameObject energyRefill;
     public GameObject healthRefill;
     public GameObject bulletRefill;
-    public GameObject moneyRefill;
 
     private float xMin = -630, xMax = 330;
     private float zMin = -269, zMax = 12;
@@ -53,7 +52,7 @@ public class PerkSpawn : MonoBehaviour
 
     GameObject GetRandomPerk()
     {
-        int randomIndex = Random.Range(0, 4); 
+        int randomIndex = Random.Range(0, 3); 
 
         switch (randomIndex)
         {
@@ -63,8 +62,7 @@ public class PerkSpawn : MonoBehaviour
                 return healthRefill;
             case 2:
                 return bulletRefill;
-            case 3:
-                return moneyRefill;
+
             default:
                 return null;
         }
