@@ -49,7 +49,7 @@ public class Player : GObject
         energy = Math.Min(100, energy + amount);
     }
 
-    protected override void Die()
+    public override void Die()
     {
         healthText.text = health.ToString();
         animator.SetTrigger("fall");

@@ -16,7 +16,7 @@ public abstract class GObject : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    protected abstract void Die();
+    public abstract void Die();
 
     public void TakeDamage(int damage)
     {

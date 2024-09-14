@@ -19,15 +19,12 @@ public class Zombie : GObject
 
     private void Update()
     {
-        if (health == 0)
-        {
-            Die();
-        }
         if (!isDied())
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
             if (distanceToPlayer > maxDistance)
             {
+                health = 0;
                 Die();
             }
 
@@ -50,7 +47,7 @@ public class Zombie : GObject
         canDealDamage = true;
     }
 
-    protected override void Die()
+    public override void Die()
     {
         animator.SetTrigger("fall");
         audioSource.clip = dieClip;
