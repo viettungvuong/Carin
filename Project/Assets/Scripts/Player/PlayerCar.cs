@@ -66,8 +66,9 @@ public class PlayerCar : MonoBehaviour
         {
             instructionText.gameObject.SetActive(true);
             instructionText.text = interactKey + ": Drive";
-            UpdateInstructionTextPosition();
-            
+            Vector3 screenPosition = Camera.main.WorldToScreenPoint(car.transform.position);
+            instructionText.transform.position = screenPosition + new Vector3(100, 100, 0);
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 EnterCarMode();
@@ -88,11 +89,6 @@ public class PlayerCar : MonoBehaviour
 
     }
 
-    void UpdateInstructionTextPosition()
-    {
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        instructionText.transform.position = screenPosition + new Vector3(100, 100, 0); 
-    }
 
     void EnterCarMode()
     {
