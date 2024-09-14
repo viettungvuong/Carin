@@ -883,6 +883,7 @@ MonoBehaviour:
   hipFireDistance: 10
   bulletText: {fileID: 0}
   shotClip: {fileID: 0}
+  reloadClip: {fileID: 0}
 --- !u!1 &2164257231771159063
 GameObject:
   m_ObjectHideFlags: 0
@@ -7461,7 +7462,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -9056706297790775429, guid: 750998db7fd03a34d9b732aa156d66fe, type: 3}
+  m_Mesh: {fileID: 8341161198671653776, guid: a4b30c6c2760c01459fef0863777b5b1, type: 3}
   m_Bones:
   - {fileID: 4578224852466797743}
   - {fileID: 6420713808101022493}

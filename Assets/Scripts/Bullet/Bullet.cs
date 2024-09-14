@@ -14,6 +14,11 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.forward * speed;
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other) {
         Instantiate(vfx, transform.position, Quaternion.identity);
 

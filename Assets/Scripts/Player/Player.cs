@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : GObject
 {
     [HideInInspector] public int money, energy;
-    public TextMeshProUGUI healthText, energyText, moneyText;
+    public TextMeshProUGUI healthText, energyText;
     Animator animator;
 
     [SerializeField] private GameObject diePanel;
@@ -23,7 +23,6 @@ public class Player : GObject
     private void Update() {
         healthText.text = health.ToString();
         energyText.text = energy.ToString();
-        moneyText.text = money.ToString();
     }
 
     

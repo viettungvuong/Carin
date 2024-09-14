@@ -26,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] float aimSmoothSpeed = 20;
     [SerializeField] LayerMask aimMask;
 
-    [SerializeField] Transform muzzle;
+    [SerializeField] Transform muzzle, gun;
 
     [SerializeField] float bulletForce = 100f;
     [SerializeField] float range = 100f;
@@ -156,8 +156,15 @@ public class PlayerAttack : MonoBehaviour
         //     }
         // }
 
-        GameObject bullet = ObjectPool.SpawnFromPool("Bullet", muzzle.position);
-        bullet.transform.rotation = muzzle.rotation;
+        GameObject bullet = ObjectPool.SpawnFromPool("Bullet",  muzzle.position);
+
+        Vector3 gunForward = new Vector3(gun.transform.forward.x, 0f, gun.transform.forward.z);
+        Vector3 gunAngle = Quaternion.LookRotation(gunForward).eulerAngles;
+        Vector3 offset = gun.transform.rotation.eulerAngles - bullet.transform.rotation.eulerAngles;
+
+        bullet.transform.rotation = Quaternion.Euler(gunAngle + offset);
+
+
 
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         if (bulletRb != null)
