@@ -28,7 +28,7 @@ public class Fire : BaseAim
 {
     public override void EnterState(PlayerAttack aim)
     {
-        aim.anim.SetBool("Aiming", false);
+        aim.anim.SetBool("aiming", false);
         aim.currentFov = aim.hipFov;
     }
 

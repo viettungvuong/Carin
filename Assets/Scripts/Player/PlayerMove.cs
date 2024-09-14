@@ -12,14 +12,14 @@ public class PlayerMove : MonoBehaviour
         animator = transform.GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        const string shootAnimation = "fire";
+//     void Update()
+//     {
+//         const string shootAnimation = "fire";
         
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            animator.SetTrigger(shootAnimation);
-        }
-    }
+//         if (Input.GetKey(KeyCode.Q))
+//         {
+//             animator.SetTrigger(shootAnimation);
+//         }
+//     }
 }

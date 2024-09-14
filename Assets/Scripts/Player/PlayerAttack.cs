@@ -47,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
 
     public TextMeshProUGUI bulletText;
 
-    public AudioClip shotClip;
+    public AudioClip shotClip, reloadClip;
     private AudioSource audioSource;
 
     void Start()
@@ -172,6 +172,8 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator RefillClip()
     {
+        audioSource.clip = reloadClip;
+        audioSource.Play();
         isRefilling = true;
         float elapsed = 0f;
         refillProgressBar.gameObject.SetActive(true);
