@@ -15,7 +15,7 @@ public class CarControl : MonoBehaviour
     public float acceleration = 500f;
     public float brakingForce = 300f;
     public float maxTurnAngle = 15f;
-    public float maxSpeed = 50f;  // Maximum speed in meters per second
+    public float maxSpeed = 50f;  
 
     private float currentAcceleration = 0f;
     private float currentBrakingForce = 0f;
@@ -38,7 +38,7 @@ public class CarControl : MonoBehaviour
 
         float speed = rb.velocity.magnitude;  // current speed
 
-        // If speed is below maxSpeed, apply acceleration; otherwise, stop accelerating
+        // if speed is below maxSpeed, apply acceleration; otherwise, stop accelerating
         if (speed < maxSpeed)
         {
             currentAcceleration = acceleration * Input.GetAxis("Vertical");
@@ -49,9 +49,14 @@ public class CarControl : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.Space))
+        {
             currentBrakingForce = brakingForce;
+        }
         else
+        {
             currentBrakingForce = 0f;
+        }
+
 
         frontRight.motorTorque = currentAcceleration;
         frontLeft.motorTorque = currentAcceleration;

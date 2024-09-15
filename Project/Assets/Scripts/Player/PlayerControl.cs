@@ -72,6 +72,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         HandleMovementInput();
+        HandleMouseHovering(); // for rotating
 
         // Handle energy refilling and draining
         if (running)
@@ -100,6 +101,24 @@ public class PlayerControl : MonoBehaviour
         // Round energy to 0 decimal points
         player.energy = Mathf.Floor(player.energy);
     }
+    [SerializeField] float mouseSense = 1;
+    [SerializeField] Transform camFollowPos;
+    float xAxis, yAxis;
+    void HandleMouseHovering()
+    {
+        // Mouse movement for player rotation
+        xAxis += Input.GetAxisRaw("Mouse X") * mouseSense; 
+        yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense; 
+        yAxis = Mathf.Clamp(yAxis, -80, 80);  
+    }
+
+    private void LateUpdate()
+    {
+        camFollowPos.localEulerAngles = new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
+    }
+
+
 
     void HandleMovementInput()
     {
@@ -132,15 +151,15 @@ public class PlayerControl : MonoBehaviour
             walkDirection = Direction.STILL;
         }
 
-        // Rotation inputs
-        if (Input.GetKey(KeyCode.A))
-        {
-            ApplyRotation(-turnSpeed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            ApplyRotation(turnSpeed);
-        }
+        //// Rotation inputs
+        //if (Input.GetKey(KeyCode.A))
+        //{
+        //    ApplyRotation(-turnSpeed);
+        //}
+        //if (Input.GetKey(KeyCode.D))
+        //{
+        //    ApplyRotation(turnSpeed);
+        //}
 
         // Run input
         if (walking)
@@ -173,10 +192,10 @@ public class PlayerControl : MonoBehaviour
         player.energy = Mathf.Max(player.energy - energyDrainRate * Time.deltaTime, 0);
     }
 
-    void ApplyRotation(float rotationAmount)
-    {
-        float targetRotation = playerTrans.eulerAngles.y + (rotationAmount * turnMultiplier);
-        float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
-        playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
-    }
+    //void ApplyRotation(float rotationAmount)
+    //{
+    //    float targetRotation = playerTrans.eulerAngles.y + (rotationAmount * turnMultiplier);
+    //    float smoothRotation = Mathf.SmoothDampAngle(playerTrans.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+    //    playerTrans.rotation = Quaternion.Euler(0, smoothRotation, 0);
+    //}
 }

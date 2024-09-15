@@ -14,7 +14,12 @@ public class ZombieSpawn : ObjectSpawn
 
     private new void Start() {
         base.Start();
-        Spawn();
+
+        if (gameObject.CompareTag("Player"))
+        {
+            Spawn();
+        }
+
     }
 
     void Update()

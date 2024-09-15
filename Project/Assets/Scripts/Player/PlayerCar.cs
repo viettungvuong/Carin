@@ -29,7 +29,7 @@ public class PlayerCar : MonoBehaviour
         carZombieSpawn = car.GetComponent<ZombieSpawn>();
 
         instructionText.gameObject.SetActive(false); 
-        carRunSlider.gameObject.SetActive(false); // Hide slider initially
+        carRunSlider.gameObject.SetActive(false); 
 
         player = GetComponent<Player>();    
     }

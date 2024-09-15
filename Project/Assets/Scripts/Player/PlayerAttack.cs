@@ -11,13 +11,12 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public Fire hip = new Fire();
     [HideInInspector] public Aim aim = new Aim();
 
-    [SerializeField] float mouseSense = 1;
-    [SerializeField] Transform camFollowPos;
-    float xAxis, yAxis;
+
     public Camera mainCamera;
     [HideInInspector] public Animator anim;
     [HideInInspector] public CinemachineVirtualCamera vCam;
-    public float adsFov = 40;
+
+    [HideInInspector] public float adsFov = 40;
     [HideInInspector] public float hipFov;
     [HideInInspector] public float currentFov;
     public float fovSmoothSpeed = 10;
@@ -79,17 +78,9 @@ public class PlayerAttack : MonoBehaviour
         bulletText.text = bulletsInClip.ToString() + "/" + bullets.ToString();
     }
 
-    private void LateUpdate()
-    {
-        camFollowPos.localEulerAngles = new Vector3(yAxis, camFollowPos.localEulerAngles.y, camFollowPos.localEulerAngles.z);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, xAxis, transform.eulerAngles.z);
-    }
 
     private void Handleaiming()
     {
-        xAxis += Input.GetAxisRaw("Mouse X") * mouseSense;
-        yAxis -= Input.GetAxisRaw("Mouse Y") * mouseSense;
-        yAxis = Mathf.Clamp(yAxis, -80, 80);
 
         vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, currentFov, fovSmoothSpeed * Time.deltaTime);
 
