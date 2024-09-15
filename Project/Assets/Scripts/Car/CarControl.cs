@@ -81,15 +81,4 @@ public class CarControl : MonoBehaviour
         trans.rotation = rotation;
     }
 
-    private void OnCollisionEnter(Collision other) 
-    {
-        if (other.gameObject.CompareTag("Zombie"))
-        {
-            // damage based on speed of car
-            float speed = rb.velocity.magnitude;
-            int damage = Mathf.RoundToInt(speed);
-
-            other.gameObject.GetComponent<Zombie>().TakeDamage(damage);
-        }
-    }
 }
