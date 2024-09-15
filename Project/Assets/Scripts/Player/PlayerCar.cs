@@ -97,6 +97,7 @@ public class PlayerCar : MonoBehaviour
 
     void EnterCarMode()
     {
+        player.UseMoney(carMoney);
         Mode.mode = TypeMode.DRIVING;
         lastOpenedCar = DateTime.Now;
 

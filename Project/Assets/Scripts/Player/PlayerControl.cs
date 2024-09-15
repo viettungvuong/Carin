@@ -10,10 +10,10 @@ enum Direction
 public class PlayerControl : MonoBehaviour
 {
     public Animator playerAnim;
-    public float walkSpeed = 5f;
+    public float walkingSpeed = 4f;   
+    public float runningSpeed = 7f;   
     public float backwardSpeed = 3f;
     public float idleSpeed = 2f;
-    public float runSpeedIncrease = 2f;
     public float turnSpeed = 1f;
 
     private bool walking = false;
@@ -41,10 +41,11 @@ public class PlayerControl : MonoBehaviour
     private void Move()
     {
         Vector3 movement = Vector3.zero;
+        float currentSpeed = running ? runningSpeed : walkingSpeed;
 
         if (walkDirection == Direction.FORWARD)
         {
-            movement += playerTrans.forward * walkSpeed * Time.deltaTime;
+            movement += playerTrans.forward * currentSpeed * Time.deltaTime;
         }
         else if (walkDirection == Direction.BACKWARD)
         {
@@ -82,7 +83,6 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 running = false;
-                walkSpeed -= runSpeedIncrease;
                 playerAnim.ResetTrigger("run");
                 playerAnim.SetTrigger("walk");
             }
@@ -150,7 +150,6 @@ public class PlayerControl : MonoBehaviour
                 if (player.energy > 0)
                 {
                     running = true;
-                    walkSpeed += runSpeedIncrease;
                     playerAnim.SetTrigger("run");
                     playerAnim.ResetTrigger("walk");
                 }
@@ -158,7 +157,6 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 running = false;
-                walkSpeed -= runSpeedIncrease;
                 playerAnim.ResetTrigger("run");
                 playerAnim.SetTrigger("walk");
             }
