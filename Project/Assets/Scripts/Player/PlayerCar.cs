@@ -13,11 +13,14 @@ public class PlayerCar : MonoBehaviour
     public float carDuration = 30f; // duration driving a car (in seconds)
 
     private DateTime lastOpenedCar;
+    private Player player;
 
     public Slider carRunSlider;
 
     private ZombieSpawn zombieSpawn, carZombieSpawn;
     private Rigidbody rb;
+
+    public int carMoney = 100;
 
     void Start()
     {
@@ -27,6 +30,8 @@ public class PlayerCar : MonoBehaviour
 
         instructionText.gameObject.SetActive(false); 
         carRunSlider.gameObject.SetActive(false); // Hide slider initially
+
+        player = GetComponent<Player>();    
     }
 
     void Update()
@@ -62,10 +67,10 @@ public class PlayerCar : MonoBehaviour
             carRunSlider.gameObject.SetActive(false);
         }
 
-        if (Mode.mode == TypeMode.WALKING && distanceToCar <= interactionDistance) // show instruction text when near a car
+        if (Mode.mode == TypeMode.WALKING && distanceToCar <= interactionDistance && player.EnoughMoney(carMoney)) // show instruction text when near a car
         {
             instructionText.gameObject.SetActive(true);
-            instructionText.text = interactKey + ": Drive";
+            instructionText.text = interactKey + ": Drive\n$"+carMoney.ToString();
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(car.transform.position);
             instructionText.transform.position = screenPosition + new Vector3(100, 100, 0);
 

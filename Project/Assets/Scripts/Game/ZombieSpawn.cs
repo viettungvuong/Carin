@@ -25,6 +25,7 @@ public class ZombieSpawn : ObjectSpawn
         // player has move more than spawn distance
         if (distanceMoved >= spawnDistance)
         {
+            spawnNumber = 5 * PlayerLevel.Instance.GetLevel(); 
             Spawn();
             lastPosition = transform.position;
         }

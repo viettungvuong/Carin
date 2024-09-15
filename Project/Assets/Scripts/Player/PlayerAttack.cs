@@ -40,8 +40,8 @@ public class PlayerAttack : MonoBehaviour
 
 
     private static bool shot = false;
-    private int bullets = 10;
-    private int bulletsInClip = 3;
+    private int bullets = 150;
+    private int bulletsInClip = 30;
     private bool isRefilling = false;
     private float refillDuration = 2f;  // refill time
 

@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class Player : GObject
 {
-    [HideInInspector] public int money, energy;
-    public TextMeshProUGUI healthText, energyText;
+    [HideInInspector] public int money;
+    [HideInInspector] public float energy;
+    public TextMeshProUGUI healthText, energyText, moneyText;
     Animator animator;
 
     [SerializeField] private GameObject diePanel;
@@ -23,18 +24,25 @@ public class Player : GObject
     private void Update() {
         healthText.text = health.ToString();
         energyText.text = energy.ToString();
+        moneyText.text = money.ToString();
     }
 
-    
+    public bool EnoughMoney(int amount)
+    {
+        return amount >= money;
+    }
 
     public bool UseMoney(int amount){
-        if (amount>money){
-            return false;
-        }
-        else{
+        if (EnoughMoney(amount))
+        {
             money -= amount;
             return true;
         }
+        else
+        {
+            return false;
+        }
+
     }
 
     public void AddMoney(int amount){

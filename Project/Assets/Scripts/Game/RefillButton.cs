@@ -22,7 +22,7 @@ public class RefillButton : MonoBehaviour
         playerAttack = player.GetComponent<PlayerAttack>();
     }
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Player")||other.gameObject.CompareTag("Car")){
+        if (other.gameObject.CompareTag("Player")){ // only refill when not in car
             // refill respectively
             switch (refillType){
                 case RefillType.Energy:
@@ -35,9 +35,8 @@ public class RefillButton : MonoBehaviour
                     playerAttack.RefillBullets(10);
                     break;
                 case RefillType.Money:
-                    playerComponent.AddMoney(10);
+                    playerComponent.AddMoney(50);
                     break;
-            
             }
 
             this.gameObject.SetActive(false);

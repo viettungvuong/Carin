@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Zombie"))
         {
             collision.gameObject.GetComponent<Zombie>().TakeDamage(100);
+            PlayerLevel.Instance.AddKill(); 
         }
         Destroy(gameObject);
     }
