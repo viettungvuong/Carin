@@ -195,7 +195,7 @@ public class PlayerAttack : MonoBehaviour
             yield return null;
         }
 
-        int refillAmount = Mathf.Min(3, bullets);
+        int refillAmount = Mathf.Min(30, bullets);
         bulletsInClip = refillAmount;  
         bullets -= refillAmount;  
         isRefilling = false;
