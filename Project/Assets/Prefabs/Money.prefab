@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2404576e4efd4d5a9db4e0753e90be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  refillType: 2
+  refillType: 3
